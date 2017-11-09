@@ -17,7 +17,6 @@ public class FileInput {
 	} 
 	//reads csv file and prints it out
 	private void readCSV() {
-		//String csvFile = "/Users/George/Downloads/Sample_Classes.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -60,7 +59,7 @@ public class FileInput {
 		String delimeter = "/";
         if(classInfo[2].equals("") && classInfo[3].equals("")) {
         	ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
-        			Integer.parseInt(classInfo[4]), classInfo[5], false);
+        			Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]));
         	this.classes.add(ci);
         	
         }
@@ -122,7 +121,7 @@ public class FileInput {
     	}
     	
     		ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
-    				prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false);
+    				prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]));
     		this.classes.add(ci);
     	
 	}
@@ -142,7 +141,7 @@ public class FileInput {
     	}
     	
     		ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), coreqs, 
-    				Integer.parseInt(classInfo[4]),  classInfo[5], false);
+    				Integer.parseInt(classInfo[4]),  classInfo[5], false, checkIsElective(classInfo[7]));
     		this.classes.add(ci);
     	
 	}
@@ -160,8 +159,7 @@ public class FileInput {
     			}
     		}
     	}
-    	//need fix
-    	//cant find class when its not in database yet
+    	
     	for(int i = 0; i < corequisites.length; i++) {
     		for(int j = 0; j < this.classes.size(); j++) {
     			if(corequisites[i].toLowerCase().equals(this.classes.get(j).getName().toLowerCase())){
@@ -172,10 +170,18 @@ public class FileInput {
     	
     	
     		ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
-    				coreqs, prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false);
+    				coreqs, prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]));
     		this.classes.add(ci);
     	
-    	
+	}
+	
+	private Boolean checkIsElective(String isElective) {
+		if(isElective.equals("N")) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 	

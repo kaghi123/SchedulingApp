@@ -9,16 +9,17 @@ import java.util.Queue;
 
 public class T_BFS{
 	
+	@SuppressWarnings("rawtypes")
 	private Queue<Node> queueOfNodes = new LinkedList<Node>();
 	private int distance = 0;	//level or distance away from the root of node
-	private Node node;
+	private Node<?> node;
 	
-	public T_BFS(Node node) {
+	public T_BFS(Node<?> node) {
 		this.node = node;
 		BFSAlgorithm();
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void BFSAlgorithm() {
 		if(this.node == null) {
 			return;
@@ -30,11 +31,11 @@ public class T_BFS{
 			distance += 1;
 			while(!queueOfNodes.isEmpty()) {
 				//gets head of queue
-				Node current = queueOfNodes.element();
+				Node<?> current = queueOfNodes.element();
 				//see if there are any children in this current node
 				List<Node> children = current.getChildren();
 				if(children != null) {
-					for(Node child : children) {
+					for(Node<?> child : children) {
 						queueOfNodes.add(child);	//adds child to queue
 						child.setDistance(distance); //distance away from root
 						System.out.println("New child:");
@@ -65,14 +66,15 @@ public class T_BFS{
 		}
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArrayList<Node> findShortestPath() {
 		int distance = 0;
 		ArrayList<Node> shortestPath = new ArrayList<>();
-		Node currentNode = null;
+		Node<?> currentNode = null;
 		
 		queueOfNodes.add(node);
 		while(!queueOfNodes.isEmpty()) {
-			Node current = queueOfNodes.element();
+			Node<?> current = queueOfNodes.element();
 			if(current != null) {
 				List<ClassInfo> currentClasses = (List<ClassInfo>)current.getData();
 				for(ClassInfo c: currentClasses) {
@@ -90,7 +92,7 @@ public class T_BFS{
 			}
 			List<Node> neighbors = current.getChildren();
 			if(neighbors != null) {
-				for(Node n: neighbors) {
+				for(Node<?> n: neighbors) {
 					queueOfNodes.add(n);
 					
 				}

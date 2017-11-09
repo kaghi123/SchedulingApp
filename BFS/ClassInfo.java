@@ -11,11 +11,12 @@ public class ClassInfo {
 	private int units;
 	private String grade;
 	private boolean completed;
+	private boolean isElective;
 	
 	//constructor if class has both prerequisite and corequisite
 	public ClassInfo(String name, int courseNumber, 
 			ArrayList<ClassInfo> corequisites, ArrayList<ClassInfo> prerequisites,
-			int units, String grade, boolean completed) {
+			int units, String grade, boolean completed, boolean elective) {
 		this.name = name;
 		this.courseNumber = courseNumber;
 		this.corequisites = corequisites;
@@ -23,12 +24,13 @@ public class ClassInfo {
 		this.units = units;
 		this.grade = grade;
 		this.completed = completed;
+		this.isElective = elective;
 	}
 	
 	//constructor if class has just prerequisite
 	public ClassInfo(String name, int courseNumber, 
 			ArrayList<ClassInfo> prerequisites,
-			int units, String grade, boolean completed) {
+			int units, String grade, boolean completed, boolean elective) {
 		this();
 		this.name = name;
 		this.courseNumber = courseNumber;
@@ -36,28 +38,31 @@ public class ClassInfo {
 		this.units = units;
 		this.grade = grade;
 		this.completed = completed;
+		this.isElective = elective;
 	}
 	
 	//constructor if class has just corequisite
 	public ClassInfo(String name, int courseNumber, 
 			int units, String grade, 
-			ArrayList<ClassInfo> corequisites, boolean completed) {
+			ArrayList<ClassInfo> corequisites, boolean completed, boolean elective) {
 		this.name = name;
 		this.courseNumber = courseNumber;
 		this.corequisites = corequisites;
 		this.units = units;
 		this.grade = grade;
 		this.completed = completed;
+		this.isElective = elective;
 	}
 	
 	//constructor if class has neither prerequisite and corequisite
 	public ClassInfo(String name, int courseNumber,
-			int units, String grade, boolean completed) {
+			int units, String grade, boolean completed, boolean elective) {
 		this.name = name;
 		this.courseNumber = courseNumber;
 		this.units = units;
 		this.grade = grade;
 		this.completed = completed;
+		this.isElective = elective;
 	}
 	
 	public ClassInfo() {
@@ -118,6 +123,14 @@ public class ClassInfo {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+	
+	public boolean isElective() {
+		return isElective;
+	}
+
+	public void setElective(boolean isElective) {
+		this.isElective = isElective;
 	}
 	
 	private String convertToString(ArrayList<ClassInfo> ci) {
