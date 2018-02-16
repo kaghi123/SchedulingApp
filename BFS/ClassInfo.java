@@ -12,11 +12,12 @@ public class ClassInfo {
 	private String grade;
 	private boolean completed;
 	private boolean isElective;
+	private String semester;
 	
 	//constructor if class has both prerequisite and corequisite
 	public ClassInfo(String name, int courseNumber, 
 			ArrayList<ClassInfo> corequisites, ArrayList<ClassInfo> prerequisites,
-			int units, String grade, boolean completed, boolean elective) {
+			int units, String grade, boolean completed, boolean elective, String semester) {
 		this.name = name;
 		this.courseNumber = courseNumber;
 		this.corequisites = corequisites;
@@ -25,12 +26,13 @@ public class ClassInfo {
 		this.grade = grade;
 		this.completed = completed;
 		this.isElective = elective;
+		this.semester = semester;
 	}
 	
 	//constructor if class has just prerequisite
 	public ClassInfo(String name, int courseNumber, 
 			ArrayList<ClassInfo> prerequisites,
-			int units, String grade, boolean completed, boolean elective) {
+			int units, String grade, boolean completed, boolean elective, String semester) {
 		this();
 		this.name = name;
 		this.courseNumber = courseNumber;
@@ -39,12 +41,13 @@ public class ClassInfo {
 		this.grade = grade;
 		this.completed = completed;
 		this.isElective = elective;
+		this.semester = semester;
 	}
 	
 	//constructor if class has just corequisite
 	public ClassInfo(String name, int courseNumber, 
 			int units, String grade, 
-			ArrayList<ClassInfo> corequisites, boolean completed, boolean elective) {
+			ArrayList<ClassInfo> corequisites, boolean completed, boolean elective, String semester) {
 		this.name = name;
 		this.courseNumber = courseNumber;
 		this.corequisites = corequisites;
@@ -52,17 +55,19 @@ public class ClassInfo {
 		this.grade = grade;
 		this.completed = completed;
 		this.isElective = elective;
+		this.semester = semester;
 	}
 	
 	//constructor if class has neither prerequisite and corequisite
 	public ClassInfo(String name, int courseNumber,
-			int units, String grade, boolean completed, boolean elective) {
+			int units, String grade, boolean completed, boolean elective, String semester) {
 		this.name = name;
 		this.courseNumber = courseNumber;
 		this.units = units;
 		this.grade = grade;
 		this.completed = completed;
 		this.isElective = elective;
+		this.semester = semester;
 	}
 	
 	public ClassInfo() {
@@ -131,6 +136,14 @@ public class ClassInfo {
 
 	public void setElective(boolean isElective) {
 		this.isElective = isElective;
+	}
+	
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 	
 	private String convertToString(ArrayList<ClassInfo> ci) {

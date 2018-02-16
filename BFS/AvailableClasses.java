@@ -1,5 +1,8 @@
 package BFS;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import BFS.MakeTree;
 
 public class AvailableClasses {
@@ -8,6 +11,7 @@ public class AvailableClasses {
 	private ArrayList<ClassInfo> classesTaken = new ArrayList<ClassInfo>();
 	private ArrayList<ClassInfo> availableClasses = new ArrayList<ClassInfo>();
 	long startTime = MakeTree.startTime;
+	private Set<ClassInfo> setOfAllClasses;
 	
 	
 	public AvailableClasses(Node<?> classtaken) {
@@ -18,7 +22,7 @@ public class AvailableClasses {
 	@SuppressWarnings("unchecked")
 	public ArrayList<ClassInfo> checkAvailableClasses(ArrayList<ClassInfo> allClasses) {
 		
-		
+		setOfAllClasses = new HashSet<ClassInfo>(allClasses);
 		ArrayList<Node<ArrayList<ClassInfo>>> tempArr = new ArrayList<Node<ArrayList<ClassInfo>>>();
 		tempArr = (ArrayList<Node<ArrayList<ClassInfo>>>) this.current.getData();
 		
@@ -39,7 +43,7 @@ public class AvailableClasses {
 			return this.availableClasses;
 		}
 		
-		if(checkGoalNode()){
+		if(checkGoalNode()){ //instead of checking each class, make the whole arraylist a goal. Make into hashset containsall
 			for(int i = 0; i < tempArr.size(); i++){
 				for(int j = 0; j < tempArr.get(i).getData().size(); j++){
 					System.out.println((tempArr.get(i).getData().get(j)));
@@ -47,53 +51,64 @@ public class AvailableClasses {
 				System.out.println("");
 				System.out.println("");
 			}
+			
 			long endTime = System.currentTimeMillis();
 			long totaltime = endTime  - startTime;
 			System.out.print(totaltime);
 			System.exit(0);
 		}
 		
+
+//		System.out.println("All classes before removeAll.");
+//		for(ClassInfo c : this.setOfAllClasses) {
+//			System.out.println(c);
+//		}
+		setOfAllClasses.removeAll(this.classesTaken);
+//		System.out.println("All classes after removeAll.");
+//		for(ClassInfo c : this.setOfAllClasses) {
+//			System.out.println(c);
+//		}
 		//boolean that checks if student has taken that class
-		boolean isTaken = false;
+//		boolean isTaken = false;
 		//gets the element in allclasses arraylist to take out
-		int elementTakeOut = 0;
-		
-		for(ClassInfo taken: this.classesTaken) { //goes through classes taken
-			for(int i = 0; i < allClasses.size(); i++) { //goes through list of classes available
-				if(taken.getName().toLowerCase().equals(allClasses.get(i).getName().toLowerCase())) { //if course name equals to class taken course name
-					isTaken = true;
-					elementTakeOut = i;
-					break;
-				}
-			}
-			if(isTaken) {
-				allClasses.remove(elementTakeOut); //avoid checking that class again
-				elementTakeOut = 0; //resets back to 0
-				
-				//if student doesn't have the prerequisites, then they can't add the class
-				isTaken = false;
-			}
-		}
-		
-		
+//		int elementTakeOut = 0;
+//		
+//		for(ClassInfo taken: this.classesTaken) { //goes through classes taken
+//			for(int i = 0; i < allClasses.size(); i++) { //goes through list of classes available
+//				if(taken.getName().toLowerCase().equals(allClasses.get(i).getName().toLowerCase())) { //if course name equals to class taken course name
+//					isTaken = true;
+//					elementTakeOut = i;
+//					break;
+//				}
+//			}
+//			if(isTaken) {
+//				allClasses.remove(elementTakeOut); //avoid checking that class again
+//				elementTakeOut = 0; //resets back to 0
+//				
+//				//if student doesn't have the prerequisites, then they can't add the class
+//				isTaken = false;
+//			}
+//		}
 		
 		
-		for(ClassInfo aClass: allClasses){
-			for(ClassInfo taken: this.classesTaken){
+		
+		
+		for(ClassInfo aClass: this.setOfAllClasses){
+			//for(ClassInfo taken: this.classesTaken){
 				if(aClass.getPrerequisites() == null){ //if no prerequisite, add class to available classes that user can add 
 					if(isClass(availableClasses, aClass)){
 						this.availableClasses.add(aClass);
 					}		
-						}
+				}
 					
 				//if there's a prerequisite, check to see if the student has taken the classes needed to add class to available classes that user can add
-				else if(aClass.getPrerequisites() != null && checkPrereq(taken, aClass.getPrerequisites())) { 
+				else if(aClass.getPrerequisites() != null && this.classesTaken.containsAll(aClass.getPrerequisites())) { 
 					//send availableClasses and aCLass to method to see if aClass is already in there
 					if(isClass(availableClasses, aClass)){
 						this.availableClasses.add(aClass);
 					}
 				}
-			}		
+			//}		
 		}	
 
 		return this.availableClasses;
@@ -146,10 +161,15 @@ public class AvailableClasses {
 	public boolean checkGoalNode() {
 		for(ClassInfo c: this.classesTaken) {
 			if(c.getName().toLowerCase().equals("cs4963")) {
-				return true;
+				for(ClassInfo i: this.classesTaken){
+					if(i.getName().toLowerCase().equals("cs4962")){
+						return true;
+					}
+				}
+				return false;
+				
 			}
 		}
 		return false;
 	}
 }
-

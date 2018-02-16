@@ -19,15 +19,15 @@ public class DisplayClass {
 		int unitsMin;
 		int unitsMax;
 
-		// ask if user has taken class
+		// ask if user if they have taken class
 		for (int i = 0; i < ClassList.size(); i++) {
 			takenClass(i);
 		}
 
-		// display classes that have been taken
 		System.out.println();
 		System.out.println();
 		
+		// display classes that have been taken
 		for (int i = 0; i < ClassList.size(); i++) {
 			if (ClassList.get(i).isCompleted()) {
 				System.out.println(ClassList.get(i).toString());
@@ -48,6 +48,7 @@ public class DisplayClass {
 			
 	}
 
+	//this method goes through each class and asks if the user has taken them
 	public void takenClass(int i) {
 		String option = "";
 		
@@ -69,6 +70,7 @@ public class DisplayClass {
 		}
 	}
 	
+	//this method asks what grade the user received in their taken class
 	public void whatGrade(int i){
 		String grade = "";
 		

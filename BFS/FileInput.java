@@ -27,6 +27,7 @@ public class FileInput {
             while ((line = br.readLine()) != null) {
             	System.out.println(line);
             	// use comma as separator
+            	//put into arraylist not array
                 String[] classInfo = line.split(cvsSplitBy);
                 addToClasses(classInfo);
             }
@@ -59,7 +60,7 @@ public class FileInput {
 		String delimeter = "/";
         if(classInfo[2].equals("") && classInfo[3].equals("")) {
         	ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
-        			Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]));
+        			Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]), classInfo[8]);
         	this.classes.add(ci);
         	
         }
@@ -121,7 +122,7 @@ public class FileInput {
     	}
     	
     		ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
-    				prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]));
+    				prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]), classInfo[8]);
     		this.classes.add(ci);
     	
 	}
@@ -141,7 +142,7 @@ public class FileInput {
     	}
     	
     		ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), coreqs, 
-    				Integer.parseInt(classInfo[4]),  classInfo[5], false, checkIsElective(classInfo[7]));
+    				Integer.parseInt(classInfo[4]),  classInfo[5], false, checkIsElective(classInfo[7]), classInfo[8]);
     		this.classes.add(ci);
     	
 	}
@@ -170,7 +171,7 @@ public class FileInput {
     	
     	
     		ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
-    				coreqs, prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]));
+    				coreqs, prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]), classInfo[8]);
     		this.classes.add(ci);
     	
 	}
