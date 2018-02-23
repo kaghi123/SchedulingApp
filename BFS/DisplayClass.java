@@ -1,6 +1,8 @@
 package BFS;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class DisplayClass {
@@ -12,12 +14,16 @@ public class DisplayClass {
 		this.ClassList = listOfClassInfo;
 		Display();
 	}
+	
+	
 
 	@SuppressWarnings("unused")
 	public void Display() {
-		ArrayList<ClassInfo> classesTaken = new ArrayList<>();
+		List<String> classesTaken = new ArrayList<>();
 		int unitsMin;
 		int unitsMax;
+		
+		
 
 		// ask if user if they have taken class
 		for (int i = 0; i < ClassList.size(); i++) {
@@ -31,9 +37,17 @@ public class DisplayClass {
 		for (int i = 0; i < ClassList.size(); i++) {
 			if (ClassList.get(i).isCompleted()) {
 				System.out.println(ClassList.get(i).toString());
-				classesTaken.add(ClassList.get(i));
+				classesTaken.add(ClassList.get(i).getName());
 			}
 
+		}
+		
+		//make static hashmap
+		//instead of having List of ClassInfo have list of strings with the class names and then the string of class names will have the key to the array of class info
+		HashMap<String, ClassInfo> map = new HashMap<>();
+		//store the classinfo in the hashmap
+		for(int i = 0; i < ClassList.size(); i++){
+			map.put(ClassList.get(i).getName(), ClassList.get(i));
 		}
 		
 		//ask how many units they want to take
@@ -43,8 +57,10 @@ public class DisplayClass {
 		System.out.println("What is the maximum number of Units you would like to take per Semester. "); // put different recemendations, international students, part time full time, 12 is usual, 18 max
 		unitsMax = Integer.parseInt(in.next());
 		
+		
+		
 		//create tree
-		MakeTree mt = new MakeTree(classesTaken, ClassList, unitsMin, unitsMax);
+		MakeTree mt = new MakeTree(classesTaken, map, unitsMin, unitsMax);
 			
 	}
 

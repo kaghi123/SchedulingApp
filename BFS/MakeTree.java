@@ -1,71 +1,119 @@
 package BFS;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 public class MakeTree {
-
-	@SuppressWarnings("rawtypes")
-	private Queue<Node> queue = new LinkedList<Node>();
 	
 	//test time
 	public static long startTime = System.currentTimeMillis();
 	
 	//set the initial taken classes as parent node. Start the BFS. Go through the queue, the 
 	//children of the element, remove the head, repeat
-	@SuppressWarnings("unchecked")
-	public MakeTree(ArrayList<ClassInfo> classesTaken, ArrayList<ClassInfo> listOfClassInfo, int unitsMin, int unitsMax) {
+	
+	public MakeTree(List<String> classesTaken, HashMap<String, ClassInfo> listOfClassInfo, int unitsMin, int unitsMax) {
+		
+		Queue<Node> queue = new LinkedList<Node>();
+		
+		Set<String> visited = new HashSet<String>();
 		
 		//initial parent node
-		Node<ArrayList<ClassInfo>> parentNode = new Node<ArrayList<ClassInfo>>(null);
-		
+		Node parentNode = new Node(null);
 		parentNode.setData(classesTaken);
-		queue.add(parentNode);
+		queue.add(parentNode); 
 		parentNode.startPath(parentNode);	
 		
-		//BFS
-		for(int i = 0; i < queue.size();){
-			goThroughQueue(queue.element(), listOfClassInfo, unitsMin, unitsMax);
-			queue.remove();
+		while(!queue.isEmpty()){
+			
+			Node curr = new Node(null);
+			curr = queue.remove();
+			
+			//check if curr is in visited
+			if(isVisited(visited, curr)){
+				
+				//if it is visited then we dont need to add the children again
+				//the rest shall be skipped and the queue will move on to the next element
+				
+			}else{
+				
+				//check if curr is goal node
+				if(checkGoal(curr)){
+					
+					//if so print path
+					List<String> path = curr.getTakenClasses();
+					for(int i = 0; i < path.size(); i++){
+						System.out.println(path.get(i));
+					}
+					
+					long endTime = System.currentTimeMillis();
+					long totaltime = endTime  - startTime;
+					System.out.print(totaltime);
+					System.exit(0);
+
+					
+					
+				}else{
+					
+					//add children to the path
+					for( Node c : curr.getChildren(listOfClassInfo, curr.getData(), unitsMin, unitsMax)){
+						
+						curr.addChild(c);
+						c.addToPath(c, parentNode.getPath());
+						
+						//get the children and add them to the queue
+						queue.add(c);
+					}
+					
+					
+					
+					
+					
+				}
+			}
 		}
 	}
 	
-	//Find combinations of classes. Add those combinations as children into the queue
-	public void goThroughQueue(Node<ArrayList<ClassInfo>> parent, ArrayList<ClassInfo> listOfClassInfo, int unitsMin, int unitsMax){
+	public boolean isVisited(Set<String> visited, Node curr){
 		
-		ArrayList<ArrayList<ClassInfo>> combOfClasses = findAvailAndCombo(parent.getListNodes(), listOfClassInfo, unitsMin, unitsMax);
-		
-		ArrayList<ClassInfo> childList = new ArrayList<ClassInfo>();
-		
-		for(int i = 0; i < combOfClasses.size(); i++){
-			childList = combOfClasses.get(i);
+		if( visited.containsAll(curr.getTakenClasses()) && !curr.getTakenClasses().isEmpty()){
+			return true;
+		}else{
+			visited.addAll(curr.getTakenClasses());
+			return false;
+		}
+	}
+	
+	public boolean checkGoal(Node curr){
+		// && curr.getData().contains("CS4963")
+		if(curr.getData().contains("CS4440")){
 			
-			//add combinations to path
-			Node<ArrayList<ClassInfo>> nodeClasses = new Node<ArrayList<ClassInfo>>(null);
-			nodeClasses.setData(childList);
-			parent.addChild(nodeClasses);
-			nodeClasses.addToPath(nodeClasses, parent.getPath());
+			return true;
+		}else{
 			
-			//add to queue
-			queue.add(nodeClasses);
+			return false;
 		}
 	}
 	
 	
-	public ArrayList<ArrayList<ClassInfo>> findAvailAndCombo(Node<?> classesTaken, ArrayList<ClassInfo> listOfClasses, int unitsMin, int unitsMax){
-		
-		//find classes that are available to take next
-		AvailableClasses av = new AvailableClasses(classesTaken);
-		ArrayList<ClassInfo> available = av.checkAvailableClasses(listOfClasses);
-		
-		//find all combination
-		Combinations cb = new Combinations();
-		ArrayList<ArrayList<ClassInfo>> combOfClasses = cb.findCombination(available, unitsMin, unitsMax);
-		
-		return combOfClasses;
-		
-	}
 	
-	
+
+//	
+//	//make sure to use getNumOfElectives method in combinations class to get the correct combination of classes and not add too many elective units
+//	//int currentElectiveUnits = nodeClasses.getParent().getNumOfElectiveUnits();//get amount of elective units from parent node and adds it to current node
+//	//nodeClasses.addNumOfElectiveUnits(currentElectiveUnits);//adds total elective units taken to current node
+//	for(ClassInfo c : combOfClasses.get(i)) { //this goes through the children for this node to check amount of electives and check goal node
+//		if(c.isElective()) {
+//			nodeClasses.addNumOfElectiveUnits(c.getUnits());//add the amount of elective units taken from a combination of classes to current node
+//		}
+//		if(c.getName().toLowerCase().equals("cs4962") || c.getName().toLowerCase().equals("cs4963")) {//temporary check goal node fix 
+//			nodeClasses.setGoal(true);
+//		}
+//	}
+//
 }

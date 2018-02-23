@@ -1,100 +1,143 @@
 package BFS;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
-public class Node<T>{
-    private T data = null;
+public class Node{
+    private List<String> classTaken;
     @SuppressWarnings("rawtypes")
-	private List<Node> children = new ArrayList<>();
-    private Node<?> parent = null;
-    private int distance;
-    @SuppressWarnings("rawtypes")
-	private ArrayList<Node> path = new ArrayList<>();
+	
+    private Node parent;
+    private int numOfElectiveUnits = 0;
+    private boolean isGoal = false;
+    List<Node> children = new ArrayList<>();
+    
 
-    public Node(T data) {
-        this.data = data;
+	@SuppressWarnings("rawtypes")
+	private List<Node> path = new ArrayList<>();
+    private List<String> takenClassesFromPath = new ArrayList<String>();
+
+    public Node(List<String> data) {
+        this.classTaken = data;
     }
 
-    public void addChild(Node<T> child) {
+    public List<Node> addChild(Node child) {
+    	
         child.setParent(this);
-        this.children.add(child);
+        children.add(child);
+        return children;
     }
 
-    public void addChild(T data) {
-        Node<T> newChild = new Node<>(data);
-        newChild.setParent(this);
-        children.add(newChild);
-    }
-
-    @SuppressWarnings("rawtypes")
 	public void addChildren(List<Node> children) {
-        for(Node<?> t : children) {
+        for(Node t : children) {
             t.setParent(this);
         }
         this.children.addAll(children);
     }
 
-    @SuppressWarnings("rawtypes")
-	public List<Node> getChildren() {
-        return children;
+	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMin, int unitsMax) {
+		
+		
+		Set<String> keySet = listOfClasses.keySet();
+		List<String> allClasses = new ArrayList<String>(keySet);
+		
+		//find classes that are available to take next
+		AvailableClasses av = new AvailableClasses(classesTaken);
+		List<String> available = av.checkAvailableClasses(allClasses, listOfClasses);
+				
+		//find all combination
+		Combinations cb = new Combinations();
+		List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMin, unitsMax);
+				
+		return combOfClasses;
+        
     }
     
-    public void insertChildren(Node<?> child) {
-    	
-    }
-    
-    public void deleteChildren(Node<?> child) {
-    	
+//    public void insertChildren(Node<?> child) {
+//    	
+//    }
+//    
+//    public void deleteChildren(Node<?> child) {
+//    	
+//    }
+
+    public List<String> getData() {
+        return classTaken;
     }
 
-    public T getData() {
-        return data;
+    public void setData(List<String> data) {
+        this.classTaken = data;
     }
 
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    private void setParent(Node<?> parent) {
+    private void setParent(Node parent) {
         this.parent = parent;
     }
 
-    public Node<?> getParent() {
+    public Node getParent() {
         return parent;
     }
 
-	public int getDistance() {
-		return distance;
+    public int getNumOfElectiveUnits() {
+		return numOfElectiveUnits;
 	}
 
-	public void setDistance(int distance) {
-		this.distance = distance;
+	public void addNumOfElectiveUnits(int numOfElectives) {
+		this.numOfElectiveUnits += numOfElectives;
 	}
 	
-	public void startPath(Node<T> currentNode) {
+	public void startPath(Node currentNode) {
 		this.path.add(currentNode);
+		setTakenClasses();
 		
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void addToPath(Node<T> currentNode, ArrayList<Node> pathNode) {
-		for(Node<?> n : pathNode) {
+	public void addToPath(Node currentNode, List<Node> pathNode) {
+		for(Node n : pathNode) {
 			this.path.add(n);
 		}
 		this.path.add(currentNode);
+		setTakenClasses();
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public ArrayList<Node> getPath(){
+	public List<Node> getPath(){
 		return this.path;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public Node<ArrayList<Node>> getListNodes(){
-		Node<ArrayList<Node>> listOfNodes = new Node<ArrayList<Node>>(this.path);
-		return listOfNodes;
+	private void setTakenClasses(){
+		if(this.path.get(this.path.size() - 1).getData() == null) {//get the previous node from the path and get the list of  classes taken from that point on the path
+			return;
+		}
+		for(Node n : this.path) {
+			for(String c : n.getData()) {
+				takenClassesFromPath.add(c);
+//				System.out.println(c);
+			}
+		}
+//		System.out.println("--------------------------------------");
+//		System.out.println("");
+//		System.out.println("");
+		
+		
+		
+	}
+	
+	public List<String> getTakenClasses(){
+		return takenClassesFromPath;
 	}
 
+	public boolean isGoal() {
+		return isGoal;
+	}
+
+	public void setGoal(boolean isGoal) {
+		this.isGoal = isGoal;
+	}
+	
+	
 	
 }
