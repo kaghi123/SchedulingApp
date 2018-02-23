@@ -40,6 +40,7 @@ public class AvailableClasses {
 			return availableClasses;
 		}
 		
+		//compare using classInfo
 		List<ClassInfo> curr = new ArrayList<>();
 		for(int i = 0; i < current.size(); i++){
 			curr.add(allClassInfo.get(current.get(i)));

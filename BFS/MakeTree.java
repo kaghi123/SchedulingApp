@@ -21,7 +21,7 @@ public class MakeTree {
 		
 		Queue<Node> queue = new LinkedList<Node>();
 		
-		Set<String> visited = new HashSet<String>();
+		Set<List<String>> visited = new HashSet<List<String>>();
 		
 		//initial parent node
 		Node parentNode = new Node(null);
@@ -46,9 +46,9 @@ public class MakeTree {
 				if(checkGoal(curr)){
 					
 					//if so print path
-					List<String> path = curr.getTakenClasses();
+					List<Node> path = curr.getPath();
 					for(int i = 0; i < path.size(); i++){
-						System.out.println(path.get(i));
+						System.out.println(path.get(i).getData());
 					}
 					
 					long endTime = System.currentTimeMillis();
@@ -61,10 +61,10 @@ public class MakeTree {
 				}else{
 					
 					//add children to the path
-					for( Node c : curr.getChildren(listOfClassInfo, curr.getData(), unitsMin, unitsMax)){
+					for( Node c : curr.getChildren(listOfClassInfo, curr.getTakenClasses(), unitsMin, unitsMax)){
 						
 						curr.addChild(c);
-						c.addToPath(c, parentNode.getPath());
+						c.addToPath(c, curr.getPath());
 						
 						//get the children and add them to the queue
 						queue.add(c);
@@ -79,19 +79,19 @@ public class MakeTree {
 		}
 	}
 	
-	public boolean isVisited(Set<String> visited, Node curr){
+	public boolean isVisited(Set<List<String>> visited, Node curr){
 		
 		if( visited.containsAll(curr.getTakenClasses()) && !curr.getTakenClasses().isEmpty()){
 			return true;
 		}else{
-			visited.addAll(curr.getTakenClasses());
+			visited.add(curr.getTakenClasses());
 			return false;
 		}
 	}
 	
 	public boolean checkGoal(Node curr){
 		// && curr.getData().contains("CS4963")
-		if(curr.getData().contains("CS4440")){
+		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
 			
 			return true;
 		}else{
