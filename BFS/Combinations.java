@@ -72,16 +72,13 @@ public class Combinations {
             	totalUnits += classInfo.get(j).getUnits();
             }
             
-            if(maxUnit < totalUnits || minUnit > totalUnits ){
-	
-			}
-            else {
+            if(maxUnit >= totalUnits && minUnit <= totalUnits ){
+            	
             	Node node = new Node(tempList);
             	
             	combClasses.add(node);
-            }
+			}
             
-            	
             return;
 		}
 		

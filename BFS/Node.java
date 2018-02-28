@@ -113,10 +113,11 @@ public class Node{
 			return;
 		}
 		for(Node n : this.path) {
-			for(String c : n.getData()) {
-				takenClassesFromPath.add(c);
+			takenClassesFromPath.addAll(n.getData());
+			//for(String c : n.getData()) {
+				//takenClassesFromPath.add(c);
 //				System.out.println(c);
-			}
+			//}
 		}
 //		System.out.println("--------------------------------------");
 //		System.out.println("");

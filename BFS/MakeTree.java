@@ -69,11 +69,6 @@ public class MakeTree {
 						//get the children and add them to the queue
 						queue.add(c);
 					}
-					
-					
-					
-					
-					
 				}
 			}
 		}
@@ -90,7 +85,7 @@ public class MakeTree {
 	}
 	
 	public boolean checkGoal(Node curr){
-		// && curr.getData().contains("CS4963")
+		//962") && curr.getData().contains("CS4963")
 		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
 			
 			return true;
