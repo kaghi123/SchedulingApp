@@ -1,7 +1,5 @@
 package BFS;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -30,6 +28,10 @@ public class MakeTree {
 		parentNode.startPath(parentNode);	
 		
 		while(!queue.isEmpty()){
+			
+			if(queue.size() == 2){
+				System.out.println("");
+			}
 			
 			Node curr = new Node(null);
 			curr = queue.remove();
@@ -76,10 +78,20 @@ public class MakeTree {
 	
 	public boolean isVisited(Set<List<String>> visited, Node curr){
 		
-		if( visited.containsAll(curr.getTakenClasses()) && !curr.getTakenClasses().isEmpty()){
+		
+//		if( visited.contains(curr.getTakenClasses()) && !curr.getTakenClasses().isEmpty()){
+//			return true;
+//		}else{
+//			visited.add(curr.getTakenClasses());
+//			return false;
+//		}
+		
+		int pSize = curr.getPath().size();
+		
+		if( visited.contains(curr.getPath().get(pSize - 1).getData()) && !curr.getPath().get(pSize - 1).getData().isEmpty()){
 			return true;
 		}else{
-			visited.add(curr.getTakenClasses());
+			visited.add(curr.getPath().get(pSize - 1).getData());
 			return false;
 		}
 	}
@@ -94,21 +106,23 @@ public class MakeTree {
 			return false;
 		}
 	}
-	
-	
-	
-
-//	
-//	//make sure to use getNumOfElectives method in combinations class to get the correct combination of classes and not add too many elective units
-//	//int currentElectiveUnits = nodeClasses.getParent().getNumOfElectiveUnits();//get amount of elective units from parent node and adds it to current node
-//	//nodeClasses.addNumOfElectiveUnits(currentElectiveUnits);//adds total elective units taken to current node
-//	for(ClassInfo c : combOfClasses.get(i)) { //this goes through the children for this node to check amount of electives and check goal node
-//		if(c.isElective()) {
-//			nodeClasses.addNumOfElectiveUnits(c.getUnits());//add the amount of elective units taken from a combination of classes to current node
-//		}
-//		if(c.getName().toLowerCase().equals("cs4962") || c.getName().toLowerCase().equals("cs4963")) {//temporary check goal node fix 
-//			nodeClasses.setGoal(true);
-//		}
-//	}
-//
 }
+
+
+
+
+
+
+//
+////make sure to use getNumOfElectives method in combinations class to get the correct combination of classes and not add too many elective units
+////int currentElectiveUnits = nodeClasses.getParent().getNumOfElectiveUnits();//get amount of elective units from parent node and adds it to current node
+////nodeClasses.addNumOfElectiveUnits(currentElectiveUnits);//adds total elective units taken to current node
+//for(ClassInfo c : combOfClasses.get(i)) { //this goes through the children for this node to check amount of electives and check goal node
+//	if(c.isElective()) {
+//		nodeClasses.addNumOfElectiveUnits(c.getUnits());//add the amount of elective units taken from a combination of classes to current node
+//	}
+//	if(c.getName().toLowerCase().equals("cs4962") || c.getName().toLowerCase().equals("cs4963")) {//temporary check goal node fix 
+//		nodeClasses.setGoal(true);
+//	}
+//}
+//

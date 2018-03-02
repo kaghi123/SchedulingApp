@@ -1,22 +1,18 @@
 package BFS;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 public class Node{
     private List<String> classTaken;
-    @SuppressWarnings("rawtypes")
-	
     private Node parent;
     private int numOfElectiveUnits = 0;
     private boolean isGoal = false;
     List<Node> children = new ArrayList<>();
     
 
-	@SuppressWarnings("rawtypes")
 	private List<Node> path = new ArrayList<>();
     private List<String> takenClassesFromPath = new ArrayList<String>();
 
@@ -94,7 +90,6 @@ public class Node{
 		
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void addToPath(Node currentNode, List<Node> pathNode) {
 		for(Node n : pathNode) {
 			this.path.add(n);
@@ -103,7 +98,6 @@ public class Node{
 		setTakenClasses();
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public List<Node> getPath(){
 		return this.path;
 	}
@@ -114,10 +108,10 @@ public class Node{
 		}
 		for(Node n : this.path) {
 			takenClassesFromPath.addAll(n.getData());
-			//for(String c : n.getData()) {
-				//takenClassesFromPath.add(c);
-//				System.out.println(c);
-			//}
+//			for(String c : n.getData()) {
+//				takenClassesFromPath.add(c);
+//				//System.out.println(c);
+//			}
 		}
 //		System.out.println("--------------------------------------");
 //		System.out.println("");

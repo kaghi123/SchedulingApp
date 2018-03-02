@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import BFS.MakeTree;
-
 public class AvailableClasses {
 
 	private List<String> current;
@@ -14,11 +12,14 @@ public class AvailableClasses {
 	//takes in a node that has an arraylist of classInfo 
 	public AvailableClasses(List<String> classtaken) {
 		this.current = classtaken;
+		System.out.println(" ");
+		for(int i = 0; i < classtaken.size(); i++){
+			System.out.println(classtaken.get(i));
+		}
 		
 	}
 	
 	//This method takes in the arraylist of ClassInfo to remove classes that the student has already taken from an arraylist of all classes
-	@SuppressWarnings("unchecked")
 	public List<String> checkAvailableClasses(List<String> allClasses, Map<String, ClassInfo> allClassInfo) {
 		//creates a set of all classes
 		Set<String> setOfAvailableClasses = new HashSet<String>(allClasses);
@@ -57,11 +58,16 @@ public class AvailableClasses {
 				
 				//if there's a prerequisite, check to see if the student has taken the classes needed to add class to available classes that user can take
 				else if(classInfo.getPrerequisites() != null && curr.containsAll(classInfo.getPrerequisites())) { 
-					availableClasses.add(className);	
+					availableClasses.add(className);
+				
 				}
 			}
 		}
-					
+		System.out.println(" ");
+		for(int i = 0; i < availableClasses.size(); i++){
+			System.out.println(availableClasses.get(i));
+		}
+		
 		return availableClasses;
 		
 	}
