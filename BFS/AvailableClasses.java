@@ -12,15 +12,15 @@ public class AvailableClasses {
 	//takes in a node that has an arraylist of classInfo 
 	public AvailableClasses(List<String> classtaken) {
 		this.current = classtaken;
-		System.out.println(" ");
-		for(int i = 0; i < classtaken.size(); i++){
-			System.out.println(classtaken.get(i));
-		}
-		
+//		System.out.println(" ");
+//		for(int i = 0; i < classtaken.size(); i++){
+//			System.out.println(classtaken.get(i));
+//		}
+
 	}
 	
 	//This method takes in the arraylist of ClassInfo to remove classes that the student has already taken from an arraylist of all classes
-	public List<String> checkAvailableClasses(List<String> allClasses, Map<String, ClassInfo> allClassInfo) {
+	public List<String> checkAvailableClasses(List<String> allClasses, Map<String, ClassInfo> allClassInfo, String currSemester, int electiveUnits) {
 		//creates a set of all classes
 		Set<String> setOfAvailableClasses = new HashSet<String>(allClasses);
 		
@@ -32,43 +32,41 @@ public class AvailableClasses {
 			for(String className: setOfAvailableClasses){
 				if(allClassInfo.containsKey(className)) {
 					ClassInfo classInfo = allClassInfo.get(className);
-					if(classInfo.getPrerequisites() == null){
-						availableClasses.add(className);
+					if(classInfo.getSemester().contains(currSemester)) {
+						if(classInfo.getPrerequisites() == null){
+							availableClasses.add(className);
+						}
 					}
 				}
 				
 			}
 			return availableClasses;
 		}
-		
-		//compare using classInfo
-		List<ClassInfo> curr = new ArrayList<>();
-		for(int i = 0; i < current.size(); i++){
-			curr.add(allClassInfo.get(current.get(i)));
-		}
 
+//		List<ClassInfo> curr = new ArrayList<>();
+//		for(int i = 0; i < current.size(); i++){
+//			curr.add(allClassInfo.get(current.get(i)));
+//		}
+		
 		for(String className: setOfAvailableClasses){
 			if(allClassInfo.containsKey(className)) {
 				ClassInfo classInfo = allClassInfo.get(className);
-				if(classInfo.getPrerequisites() == null){
-					availableClasses.add(className);
-				}
-				
-				
-				
-				//if there's a prerequisite, check to see if the student has taken the classes needed to add class to available classes that user can take
-				else if(classInfo.getPrerequisites() != null && curr.containsAll(classInfo.getPrerequisites())) { 
-					availableClasses.add(className);
-				
+				if(classInfo.getSemester().contains(currSemester)) {
+					if(classInfo.getPrerequisites() == null){
+						availableClasses.add(className);
+					}
+					//if there's a prerequisite, check to see if the student has taken the classes needed to add class to available classes that user can take
+					else if(classInfo.getPrerequisites() != null && current.containsAll(classInfo.getPrerequisites()) && electiveUnits < 18) { 
+						availableClasses.add(className);	
+					}
 				}
 			}
 		}
-		System.out.println(" ");
-		for(int i = 0; i < availableClasses.size(); i++){
-			System.out.println(availableClasses.get(i));
-		}
-		
+//		System.out.println("Current semester: " + currSemester);
+//		for(int i = 0; i < availableClasses.size(); i++){
+//			System.out.println(availableClasses.get(i));
+//		}
 		return availableClasses;
 		
-	}
+	}	
 }

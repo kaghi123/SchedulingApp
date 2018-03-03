@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class DisplayClass {
 
-	ArrayList<ClassInfo> ClassList = new ArrayList<>();
+	List<ClassInfo> ClassList;
 	Scanner in = new Scanner(System.in);
 
-	public DisplayClass(ArrayList<ClassInfo> listOfClassInfo) {
-		this.ClassList = listOfClassInfo;
+	public DisplayClass(List<ClassInfo> list) {
+		this.ClassList = list;
 		Display();
 	}
 	
