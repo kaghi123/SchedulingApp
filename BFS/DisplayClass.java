@@ -12,13 +12,11 @@ public class DisplayClass {
 
 	public DisplayClass(List<ClassInfo> list) {
 		this.ClassList = list;
-		Display();
 	}
 	
 	
 
-	@SuppressWarnings("unused")
-	public void Display() {
+	public List<SemesterCourses> Display() {
 		List<String> classesTaken = new ArrayList<>();
 		int unitsMin;
 		int unitsMax;
@@ -60,7 +58,10 @@ public class DisplayClass {
 		
 		
 		//create tree
-		MakeTree mt = new MakeTree(classesTaken, map, unitsMin, unitsMax);
+		MakeTree mt = new MakeTree();
+		
+		List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMin, unitsMax);
+		return sc;
 			
 	}
 

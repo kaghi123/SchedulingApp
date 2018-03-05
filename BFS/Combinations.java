@@ -77,10 +77,6 @@ public class Combinations {
             	Node node = new Node(tempList);
             	
             	combClasses.add(node);
-            	
-            	if(combClasses.isEmpty()){
-            		System.out.println("");
-            	}
 			}
             
             return;

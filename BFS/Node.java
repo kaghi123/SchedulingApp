@@ -57,13 +57,6 @@ public class Node{
 		return combOfClasses;
         
     }
-//    public void insertChildren(Node<?> child) {
-//    	
-//    }
-//    
-//    public void deleteChildren(Node<?> child) {
-//    	
-//    }
 
     public List<String> getData() {
         return classTaken;

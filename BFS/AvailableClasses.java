@@ -11,12 +11,8 @@ public class AvailableClasses {
 	
 	//takes in a node that has an arraylist of classInfo 
 	public AvailableClasses(List<String> classtaken) {
+		
 		this.current = classtaken;
-//		System.out.println(" ");
-//		for(int i = 0; i < classtaken.size(); i++){
-//			System.out.println(classtaken.get(i));
-//		}
-
 	}
 	
 	//This method takes in the arraylist of ClassInfo to remove classes that the student has already taken from an arraylist of all classes
@@ -42,11 +38,6 @@ public class AvailableClasses {
 			}
 			return availableClasses;
 		}
-
-//		List<ClassInfo> curr = new ArrayList<>();
-//		for(int i = 0; i < current.size(); i++){
-//			curr.add(allClassInfo.get(current.get(i)));
-//		}
 		
 		for(String className: setOfAvailableClasses){
 			if(allClassInfo.containsKey(className)) {
@@ -62,10 +53,7 @@ public class AvailableClasses {
 				}
 			}
 		}
-//		System.out.println("Current semester: " + currSemester);
-//		for(int i = 0; i < availableClasses.size(); i++){
-//			System.out.println(availableClasses.get(i));
-//		}
+
 		return availableClasses;
 		
 	}	

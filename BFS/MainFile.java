@@ -1,6 +1,8 @@
 package BFS;
 
 import java.io.IOException;
+import java.util.List;
+
 import BFS.FileInput;
 import BFS.DisplayClass;
 
@@ -16,6 +18,8 @@ public class MainFile {
 		
 		//sends the list of classes to the DisplayCLass Class
 		DisplayClass DC = new DisplayClass(f.getListOfClassInfo());
+		
+		List<SemesterCourses> sc = DC.Display();
 	}
 }
 
