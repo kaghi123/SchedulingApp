@@ -85,7 +85,6 @@ public class MakeTree {
 				//check if curr is goal node
 				if(checkGoal(curr)){			
 					//if so print path
-					//List<Node> path = curr.getPath();
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					
 					breakWhile = true;
@@ -99,7 +98,6 @@ public class MakeTree {
 					long totaltime = endTime  - startTime;
 					System.out.print(totaltime);
 					
-					//System.exit(0);
 
 				}else{
 					//add children to the path

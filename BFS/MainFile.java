@@ -19,6 +19,7 @@ public class MainFile {
 		//sends the list of classes to the DisplayCLass Class
 		DisplayClass DC = new DisplayClass(f.getListOfClassInfo());
 		
+		//returns the list of semester courses
 		List<SemesterCourses> sc = DC.Display();
 	}
 }
