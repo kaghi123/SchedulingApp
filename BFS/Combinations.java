@@ -26,6 +26,10 @@ public class Combinations {
 			printCombination(listOfClasses, available, sizeOfavailList, sizeOfNextCombo, combClasses);
 		}
 		
+        if(combClasses.isEmpty()){
+        	System.out.println("");
+        }
+		
 		return combClasses;
 	}
 
@@ -65,7 +69,6 @@ public class Combinations {
             }
             
             //check to see if the combo fits in the desired unit preference
-            
             
             int totalUnits = 0;
             for (int j = 0; j < classInfo.size(); j++){

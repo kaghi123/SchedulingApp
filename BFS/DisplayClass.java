@@ -44,7 +44,7 @@ public class DisplayClass {
 			map.put(ClassList.get(i).getName(), ClassList.get(i));
 		}
 		
-		
+		//get units
 		minUnits();
 		maxUnits();
 		
@@ -101,8 +101,8 @@ public class DisplayClass {
 		}
 	}
 	
+	//ask for min units and check if its correct
 	public void minUnits(){
-		//ask how many units they want to take
 		System.out.println("What is the minimum number of Units you would like to take per Semester. ");
 		
 		try {
@@ -118,8 +118,8 @@ public class DisplayClass {
 		}
 	}
 	
-	public void maxUnits(){
-				
+	//ask for max units and check if its correct	
+	public void maxUnits(){	
 		System.out.println("What is the maximum number of Units you would like to take per Semester. ");
 		
 		try {

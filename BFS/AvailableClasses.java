@@ -53,6 +53,10 @@ public class AvailableClasses {
 				}
 			}
 		}
+		
+		if(availableClasses.isEmpty()){
+			System.out.println("");
+		}
 
 		return availableClasses;
 		

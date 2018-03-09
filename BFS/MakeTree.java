@@ -65,8 +65,10 @@ public class MakeTree {
 		queue.add(parentNode); 
 		parentNode.startPath(parentNode);	
 		
+		//start of BFS
 		while(!queue.isEmpty()){
 			
+			//get the head of the queue
 			Node curr = new Node(null);
 			curr = queue.remove();
 			
@@ -85,7 +87,9 @@ public class MakeTree {
 				//check if curr is goal node
 				if(checkGoal(curr)){			
 					//if so print path
-					sc = curr.getSemesterCourses();//list of semester courses for the current path
+					
+					//list of semester courses for the current path
+					sc = curr.getSemesterCourses();
 					
 					breakWhile = true;
 					
@@ -94,6 +98,7 @@ public class MakeTree {
 //						roadMaps.add(path);
 //					}
 					
+					//checks time in milliseconds for testing puropses
 					long endTime = System.currentTimeMillis();
 					long totaltime = endTime  - startTime;
 					System.out.print(totaltime);
@@ -120,6 +125,7 @@ public class MakeTree {
 				}
 			}
 			
+			//will stop the while loop and return the semester courses when it gets to checkgoal is true
 			if(breakWhile == true){
 				break;
 			}
@@ -128,6 +134,7 @@ public class MakeTree {
 		return sc;
 	}
 	
+	//visited is a set that keeps track of everything that goes through the queue. If there is a repeated element visited doesn't let the children go into the queue again
 	public boolean isVisited(Set<List<String>> visited, Node curr){
 		
 		int pSize = curr.getPath().size();
@@ -140,6 +147,7 @@ public class MakeTree {
 		}
 	}
 	
+	//checks if a semester has cs4962 and cs4963
 	public boolean checkGoal(Node curr){
 		
 		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
