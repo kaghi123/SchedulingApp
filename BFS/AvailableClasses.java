@@ -38,7 +38,7 @@ public class AvailableClasses {
 			}
 			return availableClasses;
 		}
-		
+		//if student has taken classes
 		for(String className: setOfAvailableClasses){
 			if(allClassInfo.containsKey(className)) {
 				ClassInfo classInfo = allClassInfo.get(className);
@@ -52,10 +52,6 @@ public class AvailableClasses {
 					}
 				}
 			}
-		}
-		
-		if(availableClasses.isEmpty()){
-			System.out.println("");
 		}
 
 		return availableClasses;

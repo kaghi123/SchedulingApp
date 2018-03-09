@@ -72,9 +72,7 @@ public class MakeTree {
 			Node curr = new Node(null);
 			curr = queue.remove();
 			
-			if(queue.size() == 2){
-				System.out.println("");
-			}
+			
 			
 			//check if curr is in visited
 			if(isVisited(visited, curr)){
@@ -129,6 +127,10 @@ public class MakeTree {
 			if(breakWhile == true){
 				break;
 			}
+		}
+		
+		if(queue.size() == 0){
+			System.out.println("The program stopped because the input sizes you put in did not work with the number of classes we have");
 		}
 		
 		return sc;

@@ -74,7 +74,8 @@ public class FileInput {
 		ClassInfo ci = null;
 		String delimeter = "/";
 		List<String> offeredSemesters;
-        if(classInfo[2].equals("") && classInfo[3].equals("")) {//if there are no prerequisites
+		//if there are no prerequisites
+        if(classInfo[2].equals("") && classInfo[3].equals("")) {
         	if(classInfo[8].length() <= 1) {
         		offeredSemesters = new ArrayList<>(Arrays.asList(classInfo[8].split(",")));
         	}
@@ -87,7 +88,8 @@ public class FileInput {
         	this.classes.add(ci);
         	
         }
-        else if(!classInfo[3].equals("") && classInfo[2].equals("")){//if there are no corequisites
+      //if there are no corequisites
+        else if(!classInfo[3].equals("") && classInfo[2].equals("")){
         	String[] prerequisites;
         	if(classInfo[3].length() <= 1) {
         		prerequisites = classInfo[3].split(",");
@@ -106,7 +108,8 @@ public class FileInput {
         	insertPrereqisites(classInfo, prerequisites, offeredSemesters);
         	
         }
-        else if(classInfo[3].equals("") && !classInfo[2].equals("")){//if there are no prerequisites
+      //if there are no prerequisites
+        else if(classInfo[3].equals("") && !classInfo[2].equals("")){
         	String[] corequisites;
         	if(classInfo[2].length() <= 1) {
         		corequisites = classInfo[2].split(",");
@@ -124,7 +127,8 @@ public class FileInput {
         	insertCorequisites(classInfo, corequisites, offeredSemesters);
         	
         }
-        else if(!classInfo[2].equals("") && !classInfo[3].equals("")){//if there are prerequisites and corequisites 
+      //if there are prerequisites and corequisites 
+        else if(!classInfo[2].equals("") && !classInfo[3].equals("")){
         	String[] prerequisites;
         	if(classInfo[3].length() <= 1) {
         		prerequisites = classInfo[3].split(",");

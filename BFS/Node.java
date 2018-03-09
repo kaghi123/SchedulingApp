@@ -74,7 +74,13 @@ public class Node{
         return parent;
     }
 
-    public int getNumOfElectiveUnits() {
+    public int getNumOfElectiveUnits(HashMap<String, ClassInfo> listOfClasses) {
+    	for(String c : getTakenClasses()) {
+    		ClassInfo ci = listOfClasses.get(c);
+    		if(ci.isElective()) {
+    			addNumOfElectiveUnits(ci.getUnits());
+    		}
+    	}
 		return numOfElectiveUnits;
 	}
 

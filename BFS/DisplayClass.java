@@ -1,6 +1,5 @@
 package BFS;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -8,34 +7,36 @@ import java.util.Scanner;
 public class DisplayClass {
 
 	List<ClassInfo> ClassList;
+	List<String> classesTaken;
 	Scanner in = new Scanner(System.in);
 	int unitsMin;
 	int unitsMax;
 
-	public DisplayClass(List<ClassInfo> list) {
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken) {
 		this.ClassList = list;
+		this.classesTaken = classesTaken;
 	}
 	
 	public List<SemesterCourses> Display() {
-		List<String> classesTaken = new ArrayList<>();
+		//List<String> classesTaken = new ArrayList<>();
 
-		//ask if user if they have taken class
-		for (int i = 0; i < ClassList.size(); i++) {
-			takenClass(i);
-		}
-
-		System.out.println();
-		System.out.println();
-		
-		//display classes that have been taken
-		for (int i = 0; i < ClassList.size(); i++) {
-			if (ClassList.get(i).isCompleted()) {
-				System.out.println(ClassList.get(i).toString());
-				classesTaken.add(ClassList.get(i).getName());
-			}
-
-		}
-		
+//		//ask if user if they have taken class
+//		for (int i = 0; i < ClassList.size(); i++) {
+//			takenClass(i);
+//		}
+//
+//		System.out.println();
+//		System.out.println();
+//		
+//		//display classes that have been taken
+//		for (int i = 0; i < ClassList.size(); i++) {
+//			if (ClassList.get(i).isCompleted()) {
+//				System.out.println(ClassList.get(i).toString());
+//				classesTaken.add(ClassList.get(i).getName());
+//			}
+//
+//		}
+//		
 		
 		HashMap<String, ClassInfo> map = new HashMap<>();
 		
@@ -45,14 +46,14 @@ public class DisplayClass {
 		}
 		
 		//get units
-		minUnits();
-		maxUnits();
-		
+//		minUnits();
+//		maxUnits();
+//		
 		
 		//create tree
 		MakeTree mt = new MakeTree();
 		
-		List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMin, unitsMax);
+		List<SemesterCourses> sc = mt.start(classesTaken, map, 9, 12);
 		return sc;
 			
 	}

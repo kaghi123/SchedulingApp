@@ -26,10 +26,6 @@ public class Combinations {
 			printCombination(listOfClasses, available, sizeOfavailList, sizeOfNextCombo, combClasses);
 		}
 		
-        if(combClasses.isEmpty()){
-        	System.out.println("");
-        }
-		
 		return combClasses;
 	}
 
