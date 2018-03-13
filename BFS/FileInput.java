@@ -74,7 +74,7 @@ public class FileInput {
 		ClassInfo ci = null;
 		String delimeter = "/";
 		List<String> offeredSemesters;
-		//if there are no prerequisites
+		//if there are no prerequisites or corequisites
         if(classInfo[2].equals("") && classInfo[3].equals("")) {
         	if(classInfo[8].length() <= 1) {
         		offeredSemesters = new ArrayList<>(Arrays.asList(classInfo[8].split(",")));
@@ -152,7 +152,6 @@ public class FileInput {
         	}
         	insertCorequisitesPrerequisites(classInfo, prerequisites, corequisites, offeredSemesters);
         }
-        
 	}
 	
 	//inserts prerequisite list to a classinfo object by comparing class name since the prerequisite list comes from csv file
@@ -169,7 +168,6 @@ public class FileInput {
     	ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
    				prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]), offeredSemesters); 
    		this.classes.add(ci);
-    	
 	}
 	
 	//inserts corequisites list to a classinfo object by comparing class name since the corequisite list comes from csv file
@@ -225,5 +223,4 @@ public class FileInput {
 			return true;
 		}
 	}
-	
 }

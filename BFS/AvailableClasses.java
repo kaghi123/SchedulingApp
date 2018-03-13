@@ -34,7 +34,6 @@ public class AvailableClasses {
 						}
 					}
 				}
-				
 			}
 			return availableClasses;
 		}
@@ -53,8 +52,6 @@ public class AvailableClasses {
 				}
 			}
 		}
-
 		return availableClasses;
-		
 	}	
 }

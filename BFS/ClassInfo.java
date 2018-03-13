@@ -148,14 +148,11 @@ public class ClassInfo {
 			for(String c: ci){
 				s += c + ",";
 			}
-			
 			return s;
 		}
 		else {
 			return "";
 		}
-		
-		
 	}
 	
 	public String toString() {
@@ -168,8 +165,6 @@ public class ClassInfo {
 					convertToString(this.corequisites) + "\nPrerequisites: " + convertToString(this.prerequisites) + 
 					"\nUnits: " + this.units + "\nGrade: " + this.grade + "\nCompleted: " + String.valueOf(this.completed)
 					+ "\n";
-		}
-		
+		}	
 	}
-	
 }

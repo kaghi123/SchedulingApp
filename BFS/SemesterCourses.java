@@ -31,5 +31,4 @@ public class SemesterCourses {
 	public String toString(){
 		return semesterCode + courses;
 	}
-	
 }

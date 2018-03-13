@@ -1,5 +1,6 @@
 package BFS;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -18,25 +19,25 @@ public class DisplayClass {
 	}
 	
 	public List<SemesterCourses> Display() {
-		//List<String> classesTaken = new ArrayList<>();
+		List<String> classesTaken = new ArrayList<>();
 
-//		//ask if user if they have taken class
-//		for (int i = 0; i < ClassList.size(); i++) {
-//			takenClass(i);
-//		}
-//
-//		System.out.println();
-//		System.out.println();
-//		
-//		//display classes that have been taken
-//		for (int i = 0; i < ClassList.size(); i++) {
-//			if (ClassList.get(i).isCompleted()) {
-//				System.out.println(ClassList.get(i).toString());
-//				classesTaken.add(ClassList.get(i).getName());
-//			}
-//
-//		}
-//		
+		//ask if user if they have taken class
+		for (int i = 0; i < ClassList.size(); i++) {
+			takenClass(i);
+		}
+
+		System.out.println();
+		System.out.println();
+		
+		//display classes that have been taken
+		for (int i = 0; i < ClassList.size(); i++) {
+			if (ClassList.get(i).isCompleted()) {
+				System.out.println(ClassList.get(i).toString());
+				classesTaken.add(ClassList.get(i).getName());
+			}
+
+		}
+		
 		
 		HashMap<String, ClassInfo> map = new HashMap<>();
 		
@@ -46,16 +47,14 @@ public class DisplayClass {
 		}
 		
 		//get units
-//		minUnits();
-//		maxUnits();
-//		
+		minUnits();
+		maxUnits();
 		
 		//create tree
 		MakeTree mt = new MakeTree();
 		
-		List<SemesterCourses> sc = mt.start(classesTaken, map, 9, 12);
+		List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMin, unitsMax);
 		return sc;
-			
 	}
 
 	//this method goes through each class and asks if the user has taken them
@@ -76,7 +75,6 @@ public class DisplayClass {
 		} else {
 			System.out.println("Invalid Input");
 			takenClass(i);
-
 		}
 	}
 	
@@ -114,8 +112,7 @@ public class DisplayClass {
 		    System.out.println("Invalid input");
 		    System.out.println("");
 		    unitsMin = 0;
-		    minUnits();
-		    
+		    minUnits(); 
 		}
 	}
 	
@@ -124,7 +121,6 @@ public class DisplayClass {
 		System.out.println("What is the maximum number of Units you would like to take per Semester. ");
 		
 		try {
-			
 		    unitsMax = Integer.parseInt(in.next());
 		    
 		    if(unitsMax < unitsMin){

@@ -24,8 +24,8 @@ public class MainFile {
 		
 		//returns the list of semester courses
 		List<SemesterCourses> sc = DC.Display();
+		
+		//ask if user would like to switch classes
+		Constraint c = new Constraint();
 	}
 }
-
-
-

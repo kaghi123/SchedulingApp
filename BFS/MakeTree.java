@@ -67,21 +67,16 @@ public class MakeTree {
 		
 		//start of BFS
 		while(!queue.isEmpty()){
-			
 			//get the head of the queue
 			Node curr = new Node(null);
 			curr = queue.remove();
 			
-			
-			
 			//check if curr is in visited
 			if(isVisited(visited, curr)){
-				
 				//if it is visited then we dont need to add the children again
 				//the rest shall be skipped and the queue will move on to the next element
 				
 			}else{
-				
 				//check if curr is goal node
 				if(checkGoal(curr)){			
 					//if so print path
@@ -129,9 +124,9 @@ public class MakeTree {
 			}
 		}
 		
-		if(queue.size() == 0){
-			System.out.println("The program stopped because the input sizes you put in did not work with the number of classes we have");
-		}
+//		if(queue.size() == 0){
+//			System.out.println("The program stopped because the input sizes you put in did not work with the number of classes we have");
+//		}
 		
 		return sc;
 	}
@@ -151,7 +146,7 @@ public class MakeTree {
 	
 	//checks if a semester has cs4962 and cs4963
 	public boolean checkGoal(Node curr){
-		
+		//962") && curr.getData().contains("CS4963
 		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
 			return true;
 		}else{
