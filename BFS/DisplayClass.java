@@ -19,15 +19,15 @@ public class DisplayClass {
 	}
 	
 	public List<SemesterCourses> Display() {
-		List<String> classesTaken = new ArrayList<>();
-
-		//ask if user if they have taken class
-		for (int i = 0; i < ClassList.size(); i++) {
-			takenClass(i);
-		}
-
-		System.out.println();
-		System.out.println();
+//		List<String> classesTaken = new ArrayList<>();
+//
+//		//ask if user if they have taken class
+//		for (int i = 0; i < ClassList.size(); i++) {
+//			takenClass(i);
+//		}
+//
+//		System.out.println();
+//		System.out.println();
 		
 		//display classes that have been taken
 		for (int i = 0; i < ClassList.size(); i++) {
@@ -47,13 +47,13 @@ public class DisplayClass {
 		}
 		
 		//get units
-		minUnits();
-		maxUnits();
+		//minUnits();
+		//maxUnits();
 		
 		//create tree
 		MakeTree mt = new MakeTree();
 		
-		List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMin, unitsMax);
+		List<SemesterCourses> sc = mt.start(classesTaken, map, 9, 15);
 		return sc;
 	}
 

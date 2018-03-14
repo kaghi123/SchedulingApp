@@ -31,12 +31,12 @@ public class Constraint {
 	
 	public boolean isAvailable(String name, String semester){
 		
-		if(){
+//		if(){
 			return true;
-			
-		}else{
-			return false;
-		}
+//			
+//		}else{
+//			return false;
+//		}
 		
 		
 	}

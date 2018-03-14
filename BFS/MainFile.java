@@ -26,6 +26,6 @@ public class MainFile {
 		List<SemesterCourses> sc = DC.Display();
 		
 		//ask if user would like to switch classes
-		Constraint c = new Constraint();
+		//Constraint c = new Constraint();
 	}
 }
