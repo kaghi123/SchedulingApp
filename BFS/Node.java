@@ -40,7 +40,7 @@ public class Node{
         this.children.addAll(children);
     }
 
-	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMin, int unitsMax, String semester) {
+	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester) {
 		
 		Set<String> keySet = listOfClasses.keySet();
 		List<String> allClasses = new ArrayList<String>(keySet);
@@ -52,7 +52,7 @@ public class Node{
 				
 		//find all combination
 		Combinations cb = new Combinations();
-		List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMin, unitsMax);
+		List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax);
 				
 		return combOfClasses;
         

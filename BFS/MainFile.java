@@ -13,6 +13,7 @@ public class MainFile {
 	public static void main(String[] args) throws IOException {
 		//classes taken sent in
 		List<String> ClassesTaken = new ArrayList<String>(); 
+		int maxUnits = 0;
 		
 		//brings in the csv file and parses it in the FileInput Class
 		FileInput f = new FileInput("Sample_Classes.csv");
@@ -20,7 +21,7 @@ public class MainFile {
 		System.out.println("");
 		
 		//sends the list of classes to the DisplayCLass Class
-		DisplayClass DC = new DisplayClass(f.getListOfClassInfo(), ClassesTaken );
+		DisplayClass DC = new DisplayClass(f.getListOfClassInfo(), ClassesTaken, maxUnits );
 		
 		//returns the list of semester courses
 		List<SemesterCourses> sc = DC.Display();

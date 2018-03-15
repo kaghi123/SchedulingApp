@@ -7,12 +7,10 @@ import java.util.List;
 public class Combinations {
 	
 	int maxUnit = 0;
-	int minUnit = 0;
 	
-	public List<Node> findCombination(HashMap<String, ClassInfo> listOfClasses, List<String> available, int minUnits, int maxUnits) {
+	public List<Node> findCombination(HashMap<String, ClassInfo> listOfClasses, List<String> available, int maxUnits) {
 		
 		maxUnit = maxUnits;
-		minUnit = minUnits;
 		
 		List<Node> combClasses = new ArrayList<Node>();
 		
@@ -56,7 +54,6 @@ public class Combinations {
                tempList.add(temp);
                
                if(listOfClasses.containsKey(temp)) {
-   				
    						classInfo.add(listOfClasses.get(temp));
                }
             }
@@ -67,10 +64,8 @@ public class Combinations {
             	totalUnits += classInfo.get(j).getUnits();
             }
             
-            if(maxUnit >= totalUnits && minUnit <= totalUnits ){
-            	
+            if(maxUnit >= totalUnits){
             	Node node = new Node(tempList);
-            	
             	combClasses.add(node);
 			}
             
