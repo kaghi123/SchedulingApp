@@ -31,4 +31,4 @@ public class MainFile {
 		//ask if user would like to switch classes
 		//Constraint c = new Constraint(f.getListOfClassInfo(), ClassesTaken, maxUnits);
 	}
-}
+} 
