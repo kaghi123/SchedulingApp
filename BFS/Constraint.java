@@ -29,8 +29,8 @@ public class Constraint {
 				semester = option1[1];
 				year = option1[2];
 				
-				DisplayClass DC = new DisplayClass(classInfo, classesTaken, maxUnits, true, name, semester, year);
-				List<SemesterCourses> sc = DC.Display();
+				DisplayClass DC = new DisplayClass(classInfo, classesTaken, true, name, semester, year);
+				List<SemesterCourses> sc = DC.Display(maxUnits);
 				Constraint c = new Constraint(classInfo, classesTaken, maxUnits);
 				
 			}else{

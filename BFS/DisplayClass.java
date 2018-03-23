@@ -10,24 +10,20 @@ public class DisplayClass {
 	List<ClassInfo> ClassList;
 	List<String> classesTaken;
 	Scanner in = new Scanner(System.in);
-	int maxUnits;
-	int unitsMax;
 	List<List<SemesterCourses>> listOfPaths;
 	boolean constraint;
 	String name;
 	String semester;
 	String year;
 
-	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits) {
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
-		this.maxUnits = maxUnits;
 	}
 	
-	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits, boolean constraint, String name, String semester, String year) {
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, boolean constraint, String name, String semester, String year) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
-		this.maxUnits = maxUnits;
 		this.constraint = constraint;
 		this.name = name;
 		this.semester = semester;
@@ -35,7 +31,7 @@ public class DisplayClass {
 
 	}
 	
-	public List<SemesterCourses> Display() {
+	public List<SemesterCourses> Display(int unitsMax) {
 //		List<String> classesTaken = new ArrayList<>();
 //
 //		//ask if user if they have taken class
@@ -64,7 +60,7 @@ public class DisplayClass {
 		}
 		
 		//get units
-		maxUnits();
+	//	maxUnits();
 		
 		//create tree
 		MakeTree mt = new MakeTree();
@@ -76,7 +72,7 @@ public class DisplayClass {
 			
 		}else{
 			List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax, constraint);
-			listOfPaths = mt.getListOfPaths();
+			//listOfPaths = mt.getListOfPaths();
 			return sc;
 		}
 		
@@ -134,13 +130,13 @@ public class DisplayClass {
 		System.out.println("What is the maximum number of Units you would like to take per Semester. ");
 		
 		try {
-		    unitsMax = Integer.parseInt(in.next());
+		    //unitsMax = Integer.parseInt(in.next());
 		    
 		} catch (NumberFormatException e) {
 			
 		    System.out.println("Invalid input");
 		    System.out.println("");
-			unitsMax = 0;
+			// = 0;
 		    maxUnits();
 		}
 	}
