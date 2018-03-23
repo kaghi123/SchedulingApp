@@ -1,6 +1,5 @@
 package BFS;
 
-import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,22 +39,39 @@ public class Node{
         this.children.addAll(children);
     }
 
-	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester) {
+	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester, int year, boolean constraint) {
 		
 		Set<String> keySet = listOfClasses.keySet();
 		List<String> allClasses = new ArrayList<String>(keySet);
 		
 		//find classes that are available to take next
-		AvailableClasses av = new AvailableClasses(classesTaken);
-		List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits);
-		this.availableClasses = available;
-				
-		//find all combination
-		Combinations cb = new Combinations();
-		List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax);
-				
-		return combOfClasses;
-        
+			AvailableClasses av = new AvailableClasses(classesTaken);
+			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
+			this.availableClasses = available;
+			
+			//find all combination
+			Combinations cb = new Combinations();
+			List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax);
+					
+			return combOfClasses;   
+    }
+	
+	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester, int year, boolean constraint, String name, String sem, String y) {
+		
+		Set<String> keySet = listOfClasses.keySet();
+		List<String> allClasses = new ArrayList<String>(keySet);
+		
+		//find classes that are available to take next
+			
+			AvailableClasses av = new AvailableClasses(classesTaken, name, sem, year, y);
+			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
+			this.availableClasses = available;
+			
+			//find all combination
+			Combinations cb = new Combinations();
+			List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax);
+					
+			return combOfClasses;
     }
 
     public List<String> getData() {
@@ -144,39 +160,11 @@ public class Node{
 	}
 
 	public List<SemesterCourses> getSemesterCourses() {
-//		String[] semesters = {"Winter", "Spring", "Summer", "Fall"};
 		String[] semesters = {"Spring", "Fall"};
 		int year = Year.now().getValue();
-		int weekOfYear = Integer.parseInt(new SimpleDateFormat("w").format(new java.util.Date()));
 		String semesterCode = "";
 		
-		int index = 0;
-		
-//		if(weekOfYear >= 32 && weekOfYear < 51) {
-//			index = 3;
-//			semesterCode += semesters[index] + " " + year;
-//		}
-//		else if(weekOfYear >= 1 && weekOfYear < 3) {
-//			index = 0;
-//			semesterCode += semesters[index] + " " + ++year;
-//		}
-//		else if(weekOfYear >= 3 && weekOfYear < 21) {
-//			index = 1;
-//			semesterCode += semesters[index] + " " + ++year;
-//		}
-//		else if(weekOfYear >= 21 && weekOfYear < 32) {
-//			index = 2;
-//			semesterCode += semesters[index] + " " + ++year;
-//		}
-		
-		if(weekOfYear >= 21 && weekOfYear < 51) {
-			index = 1;
-			semesterCode = semesters[index] + " " + year;
-		}
-		else if(weekOfYear >= 1 && weekOfYear < 21) {
-			index = 0;
-			semesterCode = semesters[index] + " " + year;
-		}
+		int index = 1;
 		
 		for(int i = 1; i < this.path.size(); i++) {
 			//updates the index for the semester array to get the correct semester	

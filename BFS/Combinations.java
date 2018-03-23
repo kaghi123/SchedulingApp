@@ -69,8 +69,8 @@ public class Combinations {
             	combClasses.add(node);
 			}
             
-            //keep top 3
-            for(int i = 0; combClasses.size() > 3;){
+            //keep top 10
+            for(int i = 0; combClasses.size() > 10;){
             	combClasses.remove(i);
             }
 

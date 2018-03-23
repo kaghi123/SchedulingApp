@@ -1,5 +1,6 @@
 package BFS;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -11,11 +12,26 @@ public class DisplayClass {
 	Scanner in = new Scanner(System.in);
 	int maxUnits;
 	int unitsMax;
+	boolean constraint;
+	String name;
+	String semester;
+	String year;
 
 	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
 		this.maxUnits = maxUnits;
+	}
+	
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits, boolean constraint, String name, String semester, String year) {
+		this.ClassList = list;
+		this.classesTaken = classesTaken;
+		this.maxUnits = maxUnits;
+		this.constraint = constraint;
+		this.name = name;
+		this.semester = semester;
+		this.year = year;
+
 	}
 	
 	public List<SemesterCourses> Display() {
@@ -28,15 +44,15 @@ public class DisplayClass {
 //
 //		System.out.println();
 //		System.out.println();
-		
-		//display classes that have been taken
-		for (int i = 0; i < ClassList.size(); i++) {
-			if (ClassList.get(i).isCompleted()) {
-				System.out.println(ClassList.get(i).toString());
-				classesTaken.add(ClassList.get(i).getName());
-			}
-
-		}
+//		
+//		//display classes that have been taken
+//		for (int i = 0; i < ClassList.size(); i++) {
+//			if (ClassList.get(i).isCompleted()) {
+//				System.out.println(ClassList.get(i).toString());
+//				classesTaken.add(ClassList.get(i).getName());
+//			}
+//
+//		}
 		
 		
 		HashMap<String, ClassInfo> map = new HashMap<>();
@@ -52,8 +68,16 @@ public class DisplayClass {
 		//create tree
 		MakeTree mt = new MakeTree();
 		
-		List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax);
-		return sc;
+		if(constraint){
+			mt.start(classesTaken, map, unitsMax, constraint, name, semester, year);
+			List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax, constraint);
+			return sc;
+			
+		}else{
+			List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax, constraint);
+			return sc;
+		}
+		
 	}
 
 	//this method goes through each class and asks if the user has taken them

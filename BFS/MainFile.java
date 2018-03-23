@@ -12,7 +12,8 @@ public class MainFile {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException {
 		//classes taken sent in
-		List<String> ClassesTaken = new ArrayList<String>(); 
+		List<String> ClassesTaken = new ArrayList<String>();
+		
 		int maxUnits = 0;
 		
 		//brings in the csv file and parses it in the FileInput Class
@@ -21,12 +22,12 @@ public class MainFile {
 		System.out.println("");
 		
 		//sends the list of classes to the DisplayCLass Class
-		DisplayClass DC = new DisplayClass(f.getListOfClassInfo(), ClassesTaken, maxUnits );
+		DisplayClass DC = new DisplayClass(f.getListOfClassInfo(), ClassesTaken, maxUnits);
 		
 		//returns the list of semester courses
 		List<SemesterCourses> sc = DC.Display();
 		
 		//ask if user would like to switch classes
-		//Constraint c = new Constraint();
+		//Constraint c = new Constraint(f.getListOfClassInfo(), ClassesTaken, maxUnits);
 	}
 }

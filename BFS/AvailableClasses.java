@@ -8,15 +8,26 @@ import java.util.Set;
 public class AvailableClasses {
 
 	private List<String> current;
+	private String name;
+	private String semester;
+	private int year;
+	private String y;
 	
 	//takes in a node that has an arraylist of classInfo 
 	public AvailableClasses(List<String> classtaken) {
-		
 		this.current = classtaken;
 	}
 	
+	public AvailableClasses(List<String> classtaken, String name, String semester, int year, String y){
+		this.current = classtaken;
+		this.name = name;
+		this.semester = semester;
+		this.year = year;
+		this.y = y;
+	}
+	
 	//This method takes in the arraylist of ClassInfo to remove classes that the student has already taken from an arraylist of all classes
-	public List<String> checkAvailableClasses(List<String> allClasses, Map<String, ClassInfo> allClassInfo, String currSemester, int electiveUnits) {
+	public List<String> checkAvailableClasses(List<String> allClasses, Map<String, ClassInfo> allClassInfo, String currSemester, int electiveUnits, boolean constraint) {
 		//creates a set of all classes
 		Set<String> setOfAvailableClasses = new HashSet<String>(allClasses);
 		
@@ -35,6 +46,14 @@ public class AvailableClasses {
 					}
 				}
 			}
+			
+			if(constraint){
+				if(!currSemester.equals(semester) || !Integer.toString(year).equals(y)){
+					if(availableClasses.contains(name)){
+						availableClasses.remove(name);
+					}
+				}
+			}
 			return availableClasses;
 		}
 		//if student has taken classes
@@ -49,6 +68,13 @@ public class AvailableClasses {
 					else if(classInfo.getPrerequisites() != null && current.containsAll(classInfo.getPrerequisites()) && electiveUnits < 18) { 
 						availableClasses.add(className);	
 					}
+				}
+			}
+		}
+		if(constraint){
+			if(!currSemester.equals(semester) || !Integer.toString(year).equals(y)){
+				if(availableClasses.contains(name)){
+					availableClasses.remove(name);
 				}
 			}
 		}
