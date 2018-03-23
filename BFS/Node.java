@@ -68,10 +68,16 @@ public class Node{
 			this.availableClasses = available;
 			
 			//find all combination
-			Combinations cb = new Combinations();
-			List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax);
-					
-			return combOfClasses;
+			if(available.contains(name)){
+				Combinations cb = new Combinations(name);
+				List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax);
+				return combOfClasses;
+			}
+			else{
+				Combinations c = new Combinations();
+				List<Node> combOfClasses = c.findCombination(listOfClasses, available, unitsMax);
+				return combOfClasses;
+			}		
     }
 
     public List<String> getData() {

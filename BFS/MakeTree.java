@@ -97,13 +97,12 @@ public class MakeTree {
 					long totaltime = endTime  - startTime;
 					System.out.println(totaltime);
 					
-					break;
+					//break;
 					
 					//System.exit(0);
 
 				}else{
 					counter++;
-//					System.out.println("Current Year: " + semesters[index] + " " + year + "   " + "queue size: " + queue.size() + "    curlev:" + currLevelSize + "    " +  counter + ":" + nextLevelSize);
 					//add children to the path
 					
 					if(constraint){
@@ -157,16 +156,12 @@ public class MakeTree {
 					}
 				}
 			}
-			
-//			if(breakWhile == true){
-//				break;
-//			}
 		}
 		
 		return sc;
 	}
 	
-	public List<List<SemesterCourses>> getSemesterCourses(){
+	public List<List<SemesterCourses>> getListOfPaths(){
 		return listOfPaths;
 	}
 	

@@ -12,6 +12,7 @@ public class DisplayClass {
 	Scanner in = new Scanner(System.in);
 	int maxUnits;
 	int unitsMax;
+	List<List<SemesterCourses>> listOfPaths;
 	boolean constraint;
 	String name;
 	String semester;
@@ -75,9 +76,14 @@ public class DisplayClass {
 			
 		}else{
 			List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax, constraint);
+			listOfPaths = mt.getListOfPaths();
 			return sc;
 		}
 		
+	}
+	
+	public List<List<SemesterCourses>> getListOfPaths() {
+		return listOfPaths;
 	}
 
 	//this method goes through each class and asks if the user has taken them
