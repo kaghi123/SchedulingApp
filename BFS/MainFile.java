@@ -15,7 +15,7 @@ public class MainFile {
 		//classes taken sent in
 		List<String> ClassesTaken = new ArrayList<String>();
 		boolean constraint = false;
-		int maxUnits = 15;
+		int maxUnits = 0;
 		String classInput = "CS1010 Spring 2019";
 		
 		//brings in the csv file and parses it in the FileInput Class

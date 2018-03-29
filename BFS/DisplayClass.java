@@ -63,7 +63,7 @@ public class DisplayClass {
 		}
 		
 		//get units
-		//maxUnits();
+		maxUnits();
 		
 		//create tree
 		MakeTree mt = new MakeTree();
