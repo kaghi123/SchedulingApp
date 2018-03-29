@@ -11,19 +11,22 @@ public class DisplayClass {
 	List<String> classesTaken;
 	Scanner in = new Scanner(System.in);
 	List<List<SemesterCourses>> listOfPaths;
+	int maxUnits;
 	boolean constraint;
 	String name;
 	String semester;
 	String year;
 
-	public DisplayClass(List<ClassInfo> list, List<String> classesTaken) {
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
+		this.maxUnits = maxUnits;
 	}
 	
-	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, boolean constraint, String name, String semester, String year) {
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, boolean constraint, String name, String semester, String year, int maxUnits) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
+		this.maxUnits = maxUnits;
 		this.constraint = constraint;
 		this.name = name;
 		this.semester = semester;
@@ -60,19 +63,20 @@ public class DisplayClass {
 		}
 		
 		//get units
-	//	maxUnits();
+		//maxUnits();
 		
 		//create tree
 		MakeTree mt = new MakeTree();
 		
 		if(constraint){
-			mt.start(classesTaken, map, unitsMax, constraint, name, semester, year);
-			List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax, constraint);
+			mt.start(classesTaken, map, maxUnits, constraint, name, semester, year);
+			List<SemesterCourses> sc = mt.start(classesTaken, map, maxUnits, constraint);
+			listOfPaths = mt.getListOfPaths();
 			return sc;
 			
 		}else{
-			List<SemesterCourses> sc = mt.start(classesTaken, map, unitsMax, constraint);
-			//listOfPaths = mt.getListOfPaths();
+			List<SemesterCourses> sc = mt.start(classesTaken, map, maxUnits, constraint);
+			listOfPaths = mt.getListOfPaths();
 			return sc;
 		}
 		
@@ -130,13 +134,13 @@ public class DisplayClass {
 		System.out.println("What is the maximum number of Units you would like to take per Semester. ");
 		
 		try {
-		    //unitsMax = Integer.parseInt(in.next());
+		    maxUnits = Integer.parseInt(in.next());
 		    
 		} catch (NumberFormatException e) {
 			
 		    System.out.println("Invalid input");
 		    System.out.println("");
-			// = 0;
+			maxUnits = 0;
 		    maxUnits();
 		}
 	}

@@ -97,7 +97,7 @@ public class MakeTree {
 					long totaltime = endTime  - startTime;
 					System.out.println(totaltime);
 					
-					break;
+					//break;
 					
 					//System.exit(0);
 
