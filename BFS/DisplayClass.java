@@ -1,6 +1,5 @@
 package BFS;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -63,7 +62,7 @@ public class DisplayClass {
 		}
 		
 		//get units
-		maxUnits();
+		//maxUnits();
 		
 		//create tree
 		MakeTree mt = new MakeTree();

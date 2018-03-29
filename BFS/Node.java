@@ -46,7 +46,10 @@ public class Node{
 		
 		//find classes that are available to take next
 			AvailableClasses av = new AvailableClasses(classesTaken);
-			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
+			if(getNumOfElectiveUnits(listOfClasses) > 0){
+			//	System.out.println("");
+			}
+			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, getNumOfElectiveUnits(listOfClasses), constraint);
 			this.availableClasses = available;
 			
 			//find all combination
@@ -64,7 +67,7 @@ public class Node{
 		//find classes that are available to take next
 			
 			AvailableClasses av = new AvailableClasses(classesTaken, name, sem, year, y);
-			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
+			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, getNumOfElectiveUnits(listOfClasses), constraint);
 			this.availableClasses = available;
 			
 			//find all combination
@@ -175,7 +178,7 @@ public class Node{
 		for(int i = 1; i < this.path.size(); i++) {
 			//updates the index for the semester array to get the correct semester	
 			semesterCode = semesters[index] + " " + year;
-			SemesterCourses sc = new SemesterCourses(semesterCode, this.path.get(i).getData()); 
+			SemesterCourses sc = new SemesterCourses(semesterCode, this.path.get(i).getData(), this.path.get(i).getAvailableClasses()); 
 			semesterCourses.add(sc);
 			System.out.println(sc);
 			if(index % 2 == 0) { 

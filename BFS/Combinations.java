@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Combinations {
-	
 	int maxUnit = 0;
 	String name = "";
 	boolean constraint = false;
@@ -17,6 +16,7 @@ public class Combinations {
 	}
 	
 	public Combinations() {
+		
 	}
 
 	public List<Node> findCombination(HashMap<String, ClassInfo> listOfClasses, List<String> available, int maxUnits) {
@@ -92,7 +92,7 @@ public class Combinations {
 			}
             
             //keep top 10
-            for(int i = 0; combClasses.size() > 10;){
+            for(int i = 0; combClasses.size() > 3;){
             	combClasses.remove(i);
             }
 

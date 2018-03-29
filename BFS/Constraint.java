@@ -1,5 +1,6 @@
 package BFS;
 
+import java.time.Year;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,10 +16,11 @@ public class Constraint {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public Constraint(List<ClassInfo> classInfo, List<String> classesTaken, int maxUnits, String option){
 			String[] option1 = option.split(" ");
 			
-			if(isAvailable(option1[0], option1[1], classInfo)){
+			if(isAvailable(option1[0], option1[1], option1[2], classInfo)){
 				
 				name = option1[0];
 				semester = option1[1];
@@ -29,21 +31,32 @@ public class Constraint {
 				listOfPaths = DC.getListOfPaths();
 			}else{
 				System.out.println("You can not take this class that semester");
-				//Constraint c = new Constraint(classInfo, classesTaken, maxUnits, option);
+				
 			}
 	}
 
-	public boolean isAvailable(String name, String semester, List<ClassInfo> classInfo){
+	public boolean isAvailable(String name, String semester, String year, List<ClassInfo> classInfo){
 		
 		for(int i = 0; i < classInfo.size(); i++){
 			if(classInfo.get(i).getName().equals(name)){
 				if(classInfo.get(i).getSemester().contains(semester)){
-					return true;
+					//if(checkPre(classInfo.get(i), year, classInfo)){
+						return true;
+					//}
 				}
 			}
 		}
 		return false;
 	}
+	
+//	public boolean checkPre(ClassInfo classInfo,  String year, List<ClassInfo> ListClassInfo){
+//		
+//		int yearNow = Year.now().getValue();
+//		int yearDif = Integer.parseInt(year) - yearNow;
+//		
+//		
+//		
+//	}
 	
 	public List<List<SemesterCourses>> getList(){
 		return listOfPaths;

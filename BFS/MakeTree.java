@@ -37,9 +37,6 @@ public class MakeTree {
 		Queue<Node> queue = new LinkedList<Node>();
 		Set<List<String>> visited = new HashSet<List<String>>();
 		List<SemesterCourses> sc = null;
-		boolean breakWhile = false;
-		int numberOfRoadMapsGenerated = 0;
-		int amountOfRoadMaps = 3;
 		int currLevelSize = 0;
 		int nextLevelSize = 0;
 		int counter = 0;
@@ -88,7 +85,7 @@ public class MakeTree {
 			}else{
 				
 				//check if curr is goal node
-				if(checkGoal(curr)){			
+				if(checkGoal(curr, listOfClassInfo)){			
 					//if so print path
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					listOfPaths.add(sc);
@@ -97,7 +94,7 @@ public class MakeTree {
 					long totaltime = endTime  - startTime;
 					System.out.println(totaltime);
 					
-					//break;
+					break;
 					
 					//System.exit(0);
 
@@ -179,9 +176,15 @@ public class MakeTree {
 	}
 	
 	//checks if a semester has cs4962 and cs4963
-	public boolean checkGoal(Node curr){
+	public boolean checkGoal(Node curr, HashMap<String, ClassInfo> listOfClassInfo){
 		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
-			return true;
+			if(curr.getNumOfElectiveUnits(listOfClassInfo) >= 9){
+				return true;
+			}
+			else{
+				return false;
+			}
+			
 		}else{
 			
 			return false;

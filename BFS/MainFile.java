@@ -14,9 +14,9 @@ public class MainFile {
 	public static void main(String[] args) throws IOException {
 		//classes taken sent in
 		List<String> ClassesTaken = new ArrayList<String>();
-		boolean constraint = false;
-		int maxUnits = 0;
-		String classInput = "CS1010 Spring 2019";
+		boolean constraint = true;
+		int maxUnits = 15;
+		String classInput = "ENGL1010 Spring 2020";
 		
 		//brings in the csv file and parses it in the FileInput Class
 		FileInput f = new FileInput("Sample_Classes.csv");
