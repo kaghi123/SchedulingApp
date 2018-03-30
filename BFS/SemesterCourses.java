@@ -41,7 +41,4 @@ public class SemesterCourses {
 	public String toString() {
 		return semesterCode + courses + "\nAvailable courses: " + availableCourses + "\n";
 	}
-//	public String toString() {
-//		return semesterCode + courses;
-//	}
 }

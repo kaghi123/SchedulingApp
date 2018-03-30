@@ -11,8 +11,6 @@ import java.util.Set;
 
 public class MakeTree {
 	
-	//test time
-	public static long startTime = System.currentTimeMillis();
 	private List<List<SemesterCourses>> listOfPaths = new ArrayList<>();
 	String name;
 	String semester;
@@ -85,14 +83,8 @@ public class MakeTree {
 					//if so print path
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					listOfPaths.add(sc);
-
-					long endTime = System.currentTimeMillis();
-					long totaltime = endTime  - startTime;
-					System.out.println(totaltime);
-					
-					//break;
-					
-					//System.exit(0);
+					System.out.println("");
+					System.out.println("");
 
 				}else{
 					counter++;

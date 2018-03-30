@@ -14,9 +14,15 @@ public class MainFile {
 	public static void main(String[] args) throws IOException {
 		//classes taken sent in
 		List<String> ClassesTaken = new ArrayList<String>();
-		boolean constraint = false;
+		boolean constraint = true;
 		int maxUnits = 15;
 		String classInput = "CS2148 Fall 2020";
+		ClassesTaken.add("CS1010");
+		ClassesTaken.add("ENGL1010");
+		ClassesTaken.add("MATH1040");
+		ClassesTaken.add("GEBLOCKD1");
+		ClassesTaken.add("GEBLOCKAMERICANINSTITUTION1");
+		
 		
 		//brings in the csv file and parses it in the FileInput Class
 		FileInput f = new FileInput("Sample_Classes.csv");

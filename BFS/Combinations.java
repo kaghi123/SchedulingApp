@@ -98,7 +98,7 @@ public class Combinations {
 			}
             
             //keep top 10
-            for(int i = 0; combClasses.size() > 22;){
+            for(int i = 0; combClasses.size() > 20;){
             	combClasses.remove(i);
             }
 
