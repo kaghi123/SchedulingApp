@@ -16,7 +16,7 @@ public class MainFile {
 		List<String> ClassesTaken = new ArrayList<String>();
 		boolean constraint = false;
 		int maxUnits = 15;
-		String classInput = "";
+		String classInput = "CS2148 Fall 2020";
 		
 		//brings in the csv file and parses it in the FileInput Class
 		FileInput f = new FileInput("Sample_Classes.csv");

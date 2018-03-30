@@ -59,10 +59,6 @@ public class MakeTree {
 			Node curr = new Node(null);
 			curr = queue.remove();
 			
-			if(queue.size() == 2){
-				System.out.println("");
-			}
-			
 			//check if curr is in visited
 			if(isVisited(visited, curr)){
 				counter++;

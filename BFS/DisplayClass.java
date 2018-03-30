@@ -70,12 +70,12 @@ public class DisplayClass {
 		if(constraint){
 			mt.start(classesTaken, map, maxUnits, constraint, name, semester, year);
 			List<SemesterCourses> sc = mt.start(classesTaken, map, maxUnits, constraint);
-			listOfPaths = mt.getListOfPaths();
+			//listOfPaths = mt.getListOfPaths();
 			return sc;
 			
 		}else{
 			List<SemesterCourses> sc = mt.start(classesTaken, map, maxUnits, constraint);
-			listOfPaths = mt.getListOfPaths();
+			//listOfPaths = mt.getListOfPaths();
 			return sc;
 		}
 		
