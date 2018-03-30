@@ -1,6 +1,5 @@
 package BFS;
 
-import java.time.Year;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,23 +39,12 @@ public class Constraint {
 		for(int i = 0; i < classInfo.size(); i++){
 			if(classInfo.get(i).getName().equals(name)){
 				if(classInfo.get(i).getSemester().contains(semester)){
-					//if(checkPre(classInfo.get(i), year, classInfo)){
 						return true;
-					//}
 				}
 			}
 		}
 		return false;
 	}
-	
-//	public boolean checkPre(ClassInfo classInfo,  String year, List<ClassInfo> ListClassInfo){
-//		
-//		int yearNow = Year.now().getValue();
-//		int yearDif = Integer.parseInt(year) - yearNow;
-//		
-//		
-//		
-//	}
 	
 	public List<List<SemesterCourses>> getList(){
 		return listOfPaths;

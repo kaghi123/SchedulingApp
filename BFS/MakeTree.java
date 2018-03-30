@@ -85,7 +85,7 @@ public class MakeTree {
 			}else{
 				
 				//check if curr is goal node
-				if(checkGoal(curr, listOfClassInfo)){			
+				if(checkGoal(curr)){			
 					//if so print path
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					listOfPaths.add(sc);
@@ -94,7 +94,7 @@ public class MakeTree {
 					long totaltime = endTime  - startTime;
 					System.out.println(totaltime);
 					
-					break;
+					//break;
 					
 					//System.exit(0);
 
@@ -116,7 +116,7 @@ public class MakeTree {
 						for( Node c : curr.getChildren(listOfClassInfo, curr.getTakenClasses(), unitsMax, semesters[index], year, constraint)){
 							curr.addChild(c);
 							c.addToPath(c, curr.getPath());
-							
+			
 							//get the children and add them to the queue
 							queue.add(c);
 							currLevelSize++;
@@ -176,9 +176,9 @@ public class MakeTree {
 	}
 	
 	//checks if a semester has cs4962 and cs4963
-	public boolean checkGoal(Node curr, HashMap<String, ClassInfo> listOfClassInfo){
+	public boolean checkGoal(Node curr){
 		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
-			if(curr.getNumOfElectiveUnits(listOfClassInfo) >= 9){
+			if(curr.getNumOfElectiveUnits() == 18){
 				return true;
 			}
 			else{

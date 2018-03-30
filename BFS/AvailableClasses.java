@@ -76,6 +76,7 @@ public class AvailableClasses {
 				}
 			}
 		}
+		
 		if(constraint){
 			if(!currSemester.equals(semester) || !Integer.toString(year).equals(y)){
 				if(availableClasses.contains(name)){
