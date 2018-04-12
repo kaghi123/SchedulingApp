@@ -17,6 +17,7 @@ public class Combinations {
 	}
 	
 	public Combinations() {
+		
 	}
 
 	public List<Node> findCombination(HashMap<String, ClassInfo> listOfClasses, List<String> available, int maxUnits, int numOfElectives) {
@@ -46,8 +47,13 @@ public class Combinations {
         		}
             }
         }
-		
-		return combClasses;
+        
+        
+        List <Node> combClasses2 = new ArrayList<Node>();
+        for(int i = combClasses.size() - 1; i >= 0; i--){
+        	combClasses2.add(combClasses.get(i));
+        }
+		return combClasses2;
 	}
 
 	//this method creates a new temp ArrayList to store the new combinations in
@@ -97,11 +103,22 @@ public class Combinations {
             	combClasses.add(node);
 			}
             
-            //keep top 10
-            for(int i = 0; combClasses.size() > 20;){
+            if(available.contains("CS1010") && available.contains("MATH2110")){
+            	for(int i = 0; i < combClasses.size(); i++){
+            		if(combClasses.get(i).getData().contains("CS1010") && combClasses.get(i).getData().contains("MATH2110")){
+        			
+            		}else{
+            			combClasses.remove(i);
+            			i--;
+            		}
+            	}
+            }
+            
+            //keep top 
+            for(int i = 0; combClasses.size() > 60;){
             	combClasses.remove(i);
             }
-
+            
             return;
 		}
 

@@ -2,15 +2,19 @@ package BFS;
 
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
 public class MakeTree {
 	
+	//test time
+	public static long startTime = System.currentTimeMillis();
 	private List<List<SemesterCourses>> listOfPaths = new ArrayList<>();
 	String name;
 	String semester;
@@ -30,6 +34,8 @@ public class MakeTree {
 		this.y = year;
 		
 	}
+	
+
 
 	public List<SemesterCourses> start(List<String> classesTaken, HashMap<String, ClassInfo> listOfClassInfo, int unitsMax, boolean constraint) {
 		Queue<Node> queue = new LinkedList<Node>();
@@ -83,6 +89,10 @@ public class MakeTree {
 					//if so print path
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					listOfPaths.add(sc);
+					
+					long endTime = System.currentTimeMillis();
+					long totaltime = endTime  - startTime;
+					System.out.println(totaltime);
 					System.out.println("");
 					System.out.println("");
 
@@ -166,6 +176,7 @@ public class MakeTree {
 	//checks if a semester has cs4962 and cs4963
 	public boolean checkGoal(Node curr){
 		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
+			//if(curr.getData().contains("CS4961")){
 			if(curr.getNumOfElectiveUnits() == 18){
 				return true;
 			}
