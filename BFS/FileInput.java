@@ -27,7 +27,7 @@ public class FileInput {
         try {
             br = new BufferedReader(new FileReader(this.csvFile));
             while ((line = br.readLine()) != null) {
-            	//System.out.println(line);
+//            	System.out.println(line);
             	// use comma as separator
                 String[] classInfo = line.split(cvsSplitBy);
                 this.classNames.add(classInfo[0]);
@@ -74,8 +74,7 @@ public class FileInput {
 		ClassInfo ci = null;
 		String delimeter = "/";
 		List<String> offeredSemesters;
-		//if there are no prerequisites or corequisites
-        if(classInfo[2].equals("") && classInfo[3].equals("")) {
+        if(classInfo[2].equals("") && classInfo[3].equals("")) {//if there are no prerequisites
         	if(classInfo[8].length() <= 1) {
         		offeredSemesters = new ArrayList<>(Arrays.asList(classInfo[8].split(",")));
         	}
@@ -88,8 +87,7 @@ public class FileInput {
         	this.classes.add(ci);
         	
         }
-      //if there are no corequisites
-        else if(!classInfo[3].equals("") && classInfo[2].equals("")){
+        else if(!classInfo[3].equals("") && classInfo[2].equals("")){//if there are no corequisites
         	String[] prerequisites;
         	if(classInfo[3].length() <= 1) {
         		prerequisites = classInfo[3].split(",");
@@ -108,8 +106,7 @@ public class FileInput {
         	insertPrereqisites(classInfo, prerequisites, offeredSemesters);
         	
         }
-      //if there are no prerequisites
-        else if(classInfo[3].equals("") && !classInfo[2].equals("")){
+        else if(classInfo[3].equals("") && !classInfo[2].equals("")){//if there are no prerequisites
         	String[] corequisites;
         	if(classInfo[2].length() <= 1) {
         		corequisites = classInfo[2].split(",");
@@ -127,8 +124,7 @@ public class FileInput {
         	insertCorequisites(classInfo, corequisites, offeredSemesters);
         	
         }
-      //if there are prerequisites and corequisites 
-        else if(!classInfo[2].equals("") && !classInfo[3].equals("")){
+        else if(!classInfo[2].equals("") && !classInfo[3].equals("")){//if there are prerequisites and corequisites 
         	String[] prerequisites;
         	if(classInfo[3].length() <= 1) {
         		prerequisites = classInfo[3].split(",");
@@ -152,6 +148,7 @@ public class FileInput {
         	}
         	insertCorequisitesPrerequisites(classInfo, prerequisites, corequisites, offeredSemesters);
         }
+        
 	}
 	
 	//inserts prerequisite list to a classinfo object by comparing class name since the prerequisite list comes from csv file
@@ -168,6 +165,7 @@ public class FileInput {
     	ci = new ClassInfo(classInfo[0], Integer.parseInt(classInfo[1]), 
    				prereqs, Integer.parseInt(classInfo[4]), classInfo[5], false, checkIsElective(classInfo[7]), offeredSemesters); 
    		this.classes.add(ci);
+    	
 	}
 	
 	//inserts corequisites list to a classinfo object by comparing class name since the corequisite list comes from csv file
@@ -223,4 +221,5 @@ public class FileInput {
 			return true;
 		}
 	}
+	
 }

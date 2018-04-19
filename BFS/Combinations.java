@@ -7,17 +7,16 @@ import java.util.List;
 public class Combinations {
 	
 	int maxUnit = 0;
-	String name = "";
+	List<String> classes;
 	boolean constraint = false;
 	
 	
-	public Combinations(String name) {
-		this.name = name;
+	public Combinations(List<String> classes) {
+		this.classes = classes;
 		constraint = true;
 	}
 	
 	public Combinations() {
-		
 	}
 
 	public List<Node> findCombination(HashMap<String, ClassInfo> listOfClasses, List<String> available, int maxUnits, int numOfElectives) {
@@ -38,22 +37,26 @@ public class Combinations {
 		
 		//make sure the only classes in combclass include the constraint class
         if(constraint){
-        	for(int i = 0; i < combClasses.size(); i++){
-        		if(combClasses.get(i).getData().contains(name)){
-        			
-        		}else{
-        			combClasses.remove(i);
-        			i--;
-        		}
-            }
+        	for(int i = 0; i < classes.size(); i = i + 3){
+        		if(available.contains(classes.get(i))){
+        			for(int j = 0; j < combClasses.size(); j++){
+                		if(combClasses.get(j).getData().contains(classes.get(i))){
+                			
+                		}else{
+                			combClasses.remove(j);
+                			j--;
+                		}
+                    }
+				}
+        	}
         }
         
-        
-        List <Node> combClasses2 = new ArrayList<Node>();
+        List<Node> classInfo2 = new ArrayList<>();
         for(int i = combClasses.size() - 1; i >= 0; i--){
-        	combClasses2.add(combClasses.get(i));
+        	classInfo2.add(combClasses.get(i));
         }
-		return combClasses2;
+		
+		return classInfo2;
 	}
 
 	//this method creates a new temp ArrayList to store the new combinations in
@@ -81,10 +84,7 @@ public class Combinations {
             for (int j = 0; j < sizeOfNextCombo; j++){
                temp = tempCombo.get(j);
                tempList.add(temp);
-               
-               if(listOfClasses.containsKey(temp)) {
-   						classInfo.add(listOfClasses.get(temp));
-               }
+   				classInfo.add(listOfClasses.get(temp));
             }
             
             //check to see if the combo fits in the desired unit preference
@@ -103,22 +103,48 @@ public class Combinations {
             	combClasses.add(node);
 			}
             
-            if(available.contains("CS1010") && available.contains("MATH2110")){
-            	for(int i = 0; i < combClasses.size(); i++){
-            		if(combClasses.get(i).getData().contains("CS1010") && combClasses.get(i).getData().contains("MATH2110")){
-        			
-            		}else{
-            			combClasses.remove(i);
-            			i--;
-            		}
-            	}
+            //lock CS-1010 and MATH-2110 into the first semester
+            if(available.contains("CS-1010") && available.contains("MATH-2110")){
+                for(int i = 0; i < combClasses.size(); i++){
+                    if(combClasses.get(i).getData().contains("CS-1010") && combClasses.get(i).getData().contains("MATH-2110")){
+
+                    }
+                    else{
+                        combClasses.remove(i);
+                        i--;
+                    }
+                }
+            }
+            else if(available.contains("CS-1010")){
+                for(int i = 0; i < combClasses.size(); i++){
+                    if(combClasses.get(i).getData().contains("CS-1010")){
+
+                    }
+                    else{
+                        combClasses.remove(i);
+                        i--;
+                    }
+                }
+            }
+            else if(available.contains("MATH-2110")){
+                for(int i = 0; i < combClasses.size(); i++){
+                    if(combClasses.get(i).getData().contains("MATH-2110")){
+
+                    }
+                    else{
+                        combClasses.remove(i);
+                        i--;
+                    }
+                }
             }
             
-            //keep top 
+            
+            
+            //keep top combinations
             for(int i = 0; combClasses.size() > 60;){
             	combClasses.remove(i);
             }
-            
+
             return;
 		}
 

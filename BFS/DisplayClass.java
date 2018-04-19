@@ -12,9 +12,7 @@ public class DisplayClass {
 	List<List<SemesterCourses>> listOfPaths;
 	int maxUnits;
 	boolean constraint;
-	String name;
-	String semester;
-	String year;
+	List<String> classes;
 
 	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits) {
 		this.ClassList = list;
@@ -22,15 +20,12 @@ public class DisplayClass {
 		this.maxUnits = maxUnits;
 	}
 	
-	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, boolean constraint, String name, String semester, String year, int maxUnits) {
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, boolean constraint, List<String> classes, int maxUnits) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
 		this.maxUnits = maxUnits;
 		this.constraint = constraint;
-		this.name = name;
-		this.semester = semester;
-		this.year = year;
-
+		this.classes = classes;
 	}
 	
 	public List<SemesterCourses> Display(int unitsMax) {
@@ -46,7 +41,7 @@ public class DisplayClass {
 		MakeTree mt = new MakeTree();
 		
 		if(constraint){
-			mt.start(classesTaken, map, maxUnits, constraint, name, semester, year);
+			mt.start(classesTaken, map, maxUnits, constraint, classes);
 			List<SemesterCourses> sc = mt.start(classesTaken, map, maxUnits, constraint);
 			listOfPaths = mt.getListOfPaths();
 			return sc;

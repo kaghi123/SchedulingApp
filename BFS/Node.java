@@ -55,20 +55,27 @@ public class Node{
 			return combOfClasses;   
     }
 	
-	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester, int year, boolean constraint, String name, String sem, String y) {
+	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester, int year, boolean constraint, List<String> classes) {
 		
 		Set<String> keySet = listOfClasses.keySet();
 		List<String> allClasses = new ArrayList<String>(keySet);
 		
 		//find classes that are available to take next
 			
-			AvailableClasses av = new AvailableClasses(classesTaken, name, sem, year, y);
+			AvailableClasses av = new AvailableClasses(classesTaken, year, classes);
 			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
 			this.availableClasses = available;
 			
 			//find all combination
-			if(available.contains(name)){
-				Combinations cb = new Combinations(name);
+			boolean contains = false;
+			for(int i = 0; i < classes.size(); i = i + 3){
+				if(available.contains(classes.get(i))){
+					contains = true;
+				}
+			}
+			
+			if(contains){
+				Combinations cb = new Combinations(classes);
 				List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
 				return combOfClasses;
 			}

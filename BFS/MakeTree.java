@@ -2,12 +2,10 @@ package BFS;
 
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -16,9 +14,9 @@ public class MakeTree {
 	//test time
 	public static long startTime = System.currentTimeMillis();
 	private List<List<SemesterCourses>> listOfPaths = new ArrayList<>();
-	String name;
-	String semester;
-	String y;
+	List<String> classes;
+	int numOfRoadMaps = 0;
+	int maxRoadMaps = 3;
 	
 	//set the initial taken classes as parent node. Start the BFS. Go through the queue, the 
 	//children of the element, remove the head, repeat
@@ -27,16 +25,10 @@ public class MakeTree {
 		
 	}
 	
-	public void start(List<String> classesTaken, HashMap<String, ClassInfo> map, int unitsMax,
-			boolean constraint, String name, String semester, String year) {
-		this.name = name;
-		this.semester = semester;
-		this.y = year;
-		
+	public void start(List<String> classesTaken, HashMap<String, ClassInfo> map, int unitsMax, boolean constraint, List<String> classes) {
+		this.classes = classes;
 	}
 	
-
-
 	public List<SemesterCourses> start(List<String> classesTaken, HashMap<String, ClassInfo> listOfClassInfo, int unitsMax, boolean constraint) {
 		Queue<Node> queue = new LinkedList<Node>();
 		Set<List<String>> visited = new HashSet<List<String>>();
@@ -85,11 +77,11 @@ public class MakeTree {
 			}else{
 				
 				//check if curr is goal node
-				if(checkGoal(curr)){			
+				if(checkGoal(curr) && numOfRoadMaps < maxRoadMaps){			
 					//if so print path
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					listOfPaths.add(sc);
-					
+					numOfRoadMaps++;
 					long endTime = System.currentTimeMillis();
 					long totaltime = endTime  - startTime;
 					System.out.println(totaltime);
@@ -101,7 +93,7 @@ public class MakeTree {
 					//add children to the path
 					
 					if(constraint){
-						for( Node c : curr.getChildren(listOfClassInfo, curr.getTakenClasses(), unitsMax, semesters[index], year, constraint, name, semester, y)){
+						for( Node c : curr.getChildren(listOfClassInfo, curr.getTakenClasses(), unitsMax, semesters[index], year, constraint, classes)){
 							curr.addChild(c);
 							c.addToPath(c, curr.getPath());
 							
@@ -175,7 +167,7 @@ public class MakeTree {
 	
 	//checks if a semester has cs4962 and cs4963
 	public boolean checkGoal(Node curr){
-		if(curr.getData().contains("CS4962") && curr.getData().contains("CS4963")){
+		if(curr.getData().contains("CS-4962") && curr.getData().contains("CS-4963")){
 			//if(curr.getData().contains("CS4961")){
 			if(curr.getNumOfElectiveUnits() == 18){
 				return true;

@@ -8,22 +8,18 @@ import java.util.Set;
 public class AvailableClasses {
 
 	private List<String> current;
-	private String name;
-	private String semester;
 	private int year;
-	private String y;
+	List<String> classes;
 	
 	//takes in a node that has an arraylist of classInfo 
 	public AvailableClasses(List<String> classtaken) {
 		this.current = classtaken;
 	}
 	
-	public AvailableClasses(List<String> classtaken, String name, String semester, int year, String y){
+	public AvailableClasses(List<String> classtaken, int year, List<String> classes){
 		this.current = classtaken;
-		this.name = name;
-		this.semester = semester;
 		this.year = year;
-		this.y = y;
+		this.classes = classes;
 	}
 	
 	//This method takes in the arraylist of ClassInfo to remove classes that the student has already taken from an arraylist of all classes
@@ -48,9 +44,11 @@ public class AvailableClasses {
 			}
 			
 			if(constraint){
-				if(!currSemester.equals(semester) || !Integer.toString(year).equals(y)){
-					if(availableClasses.contains(name)){
-						availableClasses.remove(name);
+				for(int i = 0; i < classes.size(); i = i + 3){
+					if(!currSemester.equals(classes.get(i + 1)) || !Integer.toString(year).equals(classes.get(i + 2))){
+						if(availableClasses.contains(classes.get(i))){
+							availableClasses.remove(classes.get(i));
+						}
 					}
 				}
 			}
@@ -78,13 +76,15 @@ public class AvailableClasses {
 		}
 		
 		if(constraint){
-			if(!currSemester.equals(semester) || !Integer.toString(year).equals(y)){
-				if(availableClasses.contains(name)){
-					availableClasses.remove(name);
+			for(int i = 0; i < classes.size(); i = i + 3){
+				if(!currSemester.equals(classes.get(i + 1)) || !Integer.toString(year).equals(classes.get(i + 2))){
+					if(availableClasses.contains(classes.get(i))){
+						availableClasses.remove(classes.get(i));
+					}
 				}
 			}
 		}
-
+		
 		return availableClasses;
 	}	
 }
