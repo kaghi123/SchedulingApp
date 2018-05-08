@@ -14,18 +14,20 @@ public class DisplayClass {
 	boolean constraint;
 	List<String> classes;
 
-	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits) {
-		this.ClassList = list;
-		this.classesTaken = classesTaken;
-		this.maxUnits = maxUnits;
-	}
-	
+	//overloaded constraint constructor
 	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, boolean constraint, List<String> classes, int maxUnits) {
 		this.ClassList = list;
 		this.classesTaken = classesTaken;
 		this.maxUnits = maxUnits;
 		this.constraint = constraint;
 		this.classes = classes;
+	}
+	
+	//regular constructor
+	public DisplayClass(List<ClassInfo> list, List<String> classesTaken, int maxUnits) {
+		this.ClassList = list;
+		this.classesTaken = classesTaken;
+		this.maxUnits = maxUnits;
 	}
 	
 	public List<SemesterCourses> Display(int unitsMax) {

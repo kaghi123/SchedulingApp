@@ -14,17 +14,24 @@ public class MainFile {
 	public static void main(String[] args) throws IOException {
 		//classes taken sent in
 		List<String> classesTaken = new ArrayList<String>();
+		//constraint classes or locked classes sent in
 		List<String> constraintClasses = new ArrayList<String>();
-		boolean constraint = true;
+		//auto set to false. front end would change
+		boolean constraint = false;
+		//set to 17 units to force 5 classes per semester. 14 for 4 classes and 11 for 3 classes
 		int maxUnits = 17;
+		
+		//test data for taken classes
 //		classesTaken.add("CS-1010");
 //		classesTaken.add("ENGL-1010");
 //		classesTaken.add("MATH-2110");
 //		classesTaken.add("GE-D1");
 //		classesTaken.add("GE-AMERICANINSTITUTION1");
-		constraintClasses.add("ENGL-1010 Fall 2020");
-		constraintClasses.add("CS-3034 Spring 2021");
-		constraintClasses.add("GE-AMERICANINSTITUTION2 Fall 2018");
+		
+		//test data for constraint classes
+//		constraintClasses.add("ENGL-1010 Fall 2020");
+//		constraintClasses.add("CS-4661 Spring 2022");
+//		constraintClasses.add("GE-AMERICANINSTITUTION2 Fall 2018");
 		
 		
 		//brings in the csv file and parses it in the FileInput Class

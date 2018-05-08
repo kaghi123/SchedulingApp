@@ -33,58 +33,60 @@ public class Node{
     }
 
 	public void addChildren(List<Node> children) {
+		
         for(Node t : children) {
             t.setParent(this);
         }
         this.children.addAll(children);
     }
 
+	//method if no constraint
 	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester, int year, boolean constraint) {
 		
 		Set<String> keySet = listOfClasses.keySet();
 		List<String> allClasses = new ArrayList<String>(keySet);
 		
 		//find classes that are available to take next
-			AvailableClasses av = new AvailableClasses(classesTaken);
-			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
-			this.availableClasses = available;
-			//find all combination
-			Combinations cb = new Combinations();
-			List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
-			
-			return combOfClasses;   
+		AvailableClasses av = new AvailableClasses(classesTaken);
+		List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
+		this.availableClasses = available;
+		//find all combination
+		Combinations cb = new Combinations();
+		List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
+		
+		return combOfClasses;   
     }
 	
+	//method if constraint
 	public List<Node> getChildren(HashMap<String, ClassInfo> listOfClasses, List<String> classesTaken, int unitsMax, String semester, int year, boolean constraint, List<String> classes) {
 		
 		Set<String> keySet = listOfClasses.keySet();
 		List<String> allClasses = new ArrayList<String>(keySet);
 		
 		//find classes that are available to take next
+		AvailableClasses av = new AvailableClasses(classesTaken, year, classes);
+		List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
+		this.availableClasses = available;
 			
-			AvailableClasses av = new AvailableClasses(classesTaken, year, classes);
-			List<String> available = av.checkAvailableClasses(allClasses, listOfClasses, semester, this.numOfElectiveUnits, constraint);
-			this.availableClasses = available;
-			
-			//find all combination
-			boolean contains = false;
-			for(int i = 0; i < classes.size(); i = i + 3){
-				if(available.contains(classes.get(i))){
-					contains = true;
-				}
+		//check available classes each semester to see if there is a constraint class in it
+		boolean contains = false;
+		for(int i = 0; i < classes.size(); i = i + 3){
+			if(available.contains(classes.get(i))){
+				contains = true;
 			}
+		}
 			
-			if(contains){
-				Combinations cb = new Combinations(classes);
-				List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
-				return combOfClasses;
-			}
-			else{
-				Combinations c = new Combinations();
-				List<Node> combOfClasses = c.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
-				return combOfClasses;
-			}		
-    }
+		if(contains){
+			Combinations cb = new Combinations(classes);
+			List<Node> combOfClasses = cb.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
+			return combOfClasses;
+		}
+		else{
+			Combinations c = new Combinations();
+			List<Node> combOfClasses = c.findCombination(listOfClasses, available, unitsMax, numOfElectiveUnits);
+			return combOfClasses;
+		}		
+	}
 
     public List<String> getData() {
         return classTaken;

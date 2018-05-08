@@ -10,19 +10,20 @@ public class Combinations {
 	List<String> classes;
 	boolean constraint = false;
 	
-	
+	//overloaded constraint constructor
 	public Combinations(List<String> classes) {
 		this.classes = classes;
 		constraint = true;
 	}
 	
+	//regular constructor
 	public Combinations() {
+		
 	}
 
 	public List<Node> findCombination(HashMap<String, ClassInfo> listOfClasses, List<String> available, int maxUnits, int numOfElectives) {
 		
 		maxUnit = maxUnits;
-		
 		List<Node> combClasses = new ArrayList<Node>();
 		
 		//goes through the size of the available list to see what possible combinations there are
@@ -51,6 +52,7 @@ public class Combinations {
         	}
         }
         
+        //reverse the order of the list so the larger groupings of classes are first
         List<Node> classInfo2 = new ArrayList<>();
         for(int i = combClasses.size() - 1; i >= 0; i--){
         	classInfo2.add(combClasses.get(i));
@@ -140,7 +142,7 @@ public class Combinations {
             
             
             
-            //keep top combinations
+            //keep top combinations. 60 is a good number. Anything less and we dont have enough to get a 4 year list. You could do more but it takes longer and uses up more memory
             for(int i = 0; combClasses.size() > 60;){
             	combClasses.remove(i);
             }

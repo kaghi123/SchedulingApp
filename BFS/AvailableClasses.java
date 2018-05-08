@@ -11,15 +11,16 @@ public class AvailableClasses {
 	private int year;
 	List<String> classes;
 	
-	//takes in a node that has an arraylist of classInfo 
-	public AvailableClasses(List<String> classtaken) {
-		this.current = classtaken;
-	}
-	
+	//overloaded constraint constructor
 	public AvailableClasses(List<String> classtaken, int year, List<String> classes){
 		this.current = classtaken;
 		this.year = year;
 		this.classes = classes;
+	}
+	
+	//regular constructor
+	public AvailableClasses(List<String> classtaken) {
+		this.current = classtaken;
 	}
 	
 	//This method takes in the arraylist of ClassInfo to remove classes that the student has already taken from an arraylist of all classes
@@ -43,6 +44,7 @@ public class AvailableClasses {
 				}
 			}
 			
+			//makes sure that if its not the right year and semester, then the constraint class is not in availibleClasses
 			if(constraint){
 				for(int i = 0; i < classes.size(); i = i + 3){
 					if(!currSemester.equals(classes.get(i + 1)) || !Integer.toString(year).equals(classes.get(i + 2))){
@@ -75,6 +77,7 @@ public class AvailableClasses {
 			}
 		}
 		
+		//makes sure that if its not the right year and semester, then the constraint class is not in availibleClasses
 		if(constraint){
 			for(int i = 0; i < classes.size(); i = i + 3){
 				if(!currSemester.equals(classes.get(i + 1)) || !Integer.toString(year).equals(classes.get(i + 2))){

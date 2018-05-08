@@ -17,18 +17,17 @@ public class MakeTree {
 	List<String> classes;
 	int numOfRoadMaps = 0;
 	int maxRoadMaps = 3;
-	
-	//set the initial taken classes as parent node. Start the BFS. Go through the queue, the 
-	//children of the element, remove the head, repeat
 
 	public MakeTree() {
 		
 	}
 	
+	//overloaded constraint constructor
 	public void start(List<String> classesTaken, HashMap<String, ClassInfo> map, int unitsMax, boolean constraint, List<String> classes) {
 		this.classes = classes;
 	}
 	
+	//regular constructor
 	public List<SemesterCourses> start(List<String> classesTaken, HashMap<String, ClassInfo> listOfClassInfo, int unitsMax, boolean constraint) {
 		Queue<Node> queue = new LinkedList<Node>();
 		Set<List<String>> visited = new HashSet<List<String>>();
@@ -42,6 +41,8 @@ public class MakeTree {
 		
 		int index = 1;
 	
+		//set the initial taken classes as parent node. Start the BFS. Go through the queue, the 
+		//children of the element, remove the head, repeat
 
 		//initial parent node
 		Node parentNode = new Node(null);
@@ -82,6 +83,7 @@ public class MakeTree {
 					sc = curr.getSemesterCourses();//list of semester courses for the current path
 					listOfPaths.add(sc);
 					numOfRoadMaps++;
+					//end time
 					long endTime = System.currentTimeMillis();
 					long totaltime = endTime  - startTime;
 					System.out.println(totaltime);
@@ -114,7 +116,8 @@ public class MakeTree {
 						
 					}
 					
-					if(nextLevelSize == 0) {//after getting the children for the first time set currlevel to nextlevel to keep track of level of when the semester should change
+					//after getting the children for the first time set currlevel to nextlevel to keep track of level of when the semester should change
+					if(nextLevelSize == 0) {
 						nextLevelSize = currLevelSize;
 						currLevelSize = 0;
 						counter = 0;
@@ -128,7 +131,8 @@ public class MakeTree {
 							year++;
 						}
 					}
-					else if(counter == nextLevelSize) {//counter is the the amount of children in the current level and if it equals to nextlevel, transition to next semester
+					//counter is the the amount of children in the current level and if it equals to nextlevel, transition to next semester
+					else if(counter == nextLevelSize) {
 						nextLevelSize = currLevelSize;
 						currLevelSize = 0;
 						counter = 0;
@@ -168,7 +172,6 @@ public class MakeTree {
 	//checks if a semester has cs4962 and cs4963
 	public boolean checkGoal(Node curr){
 		if(curr.getData().contains("CS-4962") && curr.getData().contains("CS-4963")){
-			//if(curr.getData().contains("CS4961")){
 			if(curr.getNumOfElectiveUnits() == 18){
 				return true;
 			}
